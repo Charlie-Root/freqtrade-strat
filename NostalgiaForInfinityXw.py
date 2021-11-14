@@ -16,6 +16,8 @@ from freqtrade.persistence import Trade
 from datetime import datetime, timedelta
 from technical.util import resample_to_interval, resampled_merge
 from technical.indicators import zema, VIDYA, ichimoku
+from freqtrade.strategy import (BooleanParameter, CategoricalParameter, DecimalParameter,
+                                IStrategy, IntParameter)
 import time
 
 log = logging.getLogger(__name__)
