@@ -6714,11 +6714,11 @@ class NostalgiaForInfinityXw(IStrategy):
                     item_buy_logic.append(((dataframe['close'] - dataframe['open'].rolling(12).min()) / dataframe['open'].rolling(12).min()) > 0.032)
                     item_buy_logic.append(dataframe['rsi_14'] < 36.0)
                     item_buy_logic.append(dataframe['r_14'] < -75.0)
-                    item_buy_logic.append(dataframe['r_32'] < -75.0)
-                    item_buy_logic.append(dataframe['mfi'] < 46.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] > 30.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] < 84.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] > -99.0)
+                    #item_buy_logic.append(dataframe['r_32'] < -75.0)
+                    #item_buy_logic.append(dataframe['mfi'] < 46.0)
+                    #item_buy_logic.append(dataframe['rsi_14_1h'] > 30.0)
+                    #item_buy_logic.append(dataframe['rsi_14_1h'] < 84.0)
+                    #item_buy_logic.append(dataframe['r_480_1h'] > -99.0)
 
                 # Condition #2 - Semi swing. Local dip.
                 elif index == 2:
@@ -6743,10 +6743,10 @@ class NostalgiaForInfinityXw(IStrategy):
                     item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.24))
                     item_buy_logic.append(dataframe['close'].lt(dataframe['bb40_2_low'].shift()))
                     item_buy_logic.append(dataframe['close'].le(dataframe['close'].shift()))
-                    item_buy_logic.append(dataframe['cti'] < -0.5)
-                    item_buy_logic.append(dataframe['r_14'] < -90.0)
-                    item_buy_logic.append(dataframe['r_96'] < -80.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < -0.75)
+                    #item_buy_logic.append(dataframe['cti'] < -0.5)
+                    #item_buy_logic.append(dataframe['r_14'] < -90.0)
+                    #item_buy_logic.append(dataframe['r_96'] < -80.0)
+                    #item_buy_logic.append(dataframe['cti_1h'] < -0.75)
                     item_buy_logic.append(dataframe['r_480_1h'] < -30.0)
 
                 # Condition #4 - Semi swing. Local dip.
