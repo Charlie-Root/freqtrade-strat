@@ -33,10 +33,6 @@ except ImportError:
 else:
     log.info("pandas_ta successfully imported")
 
-def ha_typical_price(bars):
-    res = (bars['ha_high'] + bars['ha_low'] + bars['ha_close']) / 3.
-    return Series(index=bars.index, data=res)
-
 
 ###########################################################################################################
 ##                NostalgiaForInfinityX by iterativ                                                     ##
@@ -107,7 +103,7 @@ def ha_typical_price(bars):
 ###########################################################################################################
 
 
-class NostalgiaForInfinityXw(IStrategy):
+class NostalgiaForInfinityX(IStrategy):
     INTERFACE_VERSION = 2
 
     def version(self) -> str:
@@ -167,7 +163,7 @@ class NostalgiaForInfinityXw(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -189,70 +185,70 @@ class NostalgiaForInfinityXw(IStrategy):
     buy_params = {
         #############
         # Enable/Disable conditions
-        "buy_condition_1_enable": False,
-        "buy_condition_2_enable": False,
-        "buy_condition_3_enable": False,
-        "buy_condition_4_enable": False,
-        "buy_condition_5_enable": False,
-        "buy_condition_6_enable": False,
-        "buy_condition_7_enable": False,
-        "buy_condition_8_enable": False,
-        "buy_condition_9_enable": False,
-        "buy_condition_10_enable": False,
-        "buy_condition_11_enable": False,
-        "buy_condition_12_enable": False,
-        "buy_condition_13_enable": False,
-        "buy_condition_14_enable": False,
-        "buy_condition_15_enable": False,
-        "buy_condition_16_enable": False,
-        "buy_condition_17_enable": False,
-        "buy_condition_18_enable": False,
-        "buy_condition_19_enable": False,
-        "buy_condition_20_enable": False,
-        "buy_condition_21_enable": False,
-        "buy_condition_22_enable": False,
-        "buy_condition_23_enable": False,
-        "buy_condition_24_enable": False,
-        "buy_condition_25_enable": False,
-        "buy_condition_26_enable": False,
-        "buy_condition_27_enable": False,
-        "buy_condition_28_enable": False,
-        "buy_condition_29_enable": False,
-        "buy_condition_30_enable": False,
-        "buy_condition_31_enable": False,
-        "buy_condition_32_enable": False,
-        "buy_condition_33_enable": False,
-        "buy_condition_34_enable": False,
-        "buy_condition_35_enable": False,
-        "buy_condition_36_enable": False,
-        "buy_condition_37_enable": False,
-        "buy_condition_38_enable": False,
-        "buy_condition_39_enable": False,
-        "buy_condition_40_enable": False,
-        "buy_condition_41_enable": False,
-        "buy_condition_42_enable": False,
-        "buy_condition_43_enable": False,
-        "buy_condition_44_enable": False,
-        "buy_condition_45_enable": False,
-        "buy_condition_46_enable": False,
-        "buy_condition_47_enable": False,
-        "buy_condition_48_enable": False,
-        "buy_condition_49_enable": False,
-        "buy_condition_50_enable": False,
-        "buy_condition_51_enable": False,
-        "buy_condition_52_enable": False,
-        "buy_condition_53_enable": False,
-        "buy_condition_54_enable": False,
-        "buy_condition_55_enable": False,
-        "buy_condition_56_enable": False,
-        "buy_condition_57_enable": False,
-        "buy_condition_58_enable": False,
-        "buy_condition_59_enable": False,
-        "buy_condition_60_enable": False,
-        "buy_condition_61_enable": False,
-        "buy_condition_62_enable": False,
-        "buy_condition_63_enable": False,
-        "buy_condition_64_enable": False,
+        "buy_condition_1_enable": True,
+        "buy_condition_2_enable": True,
+        "buy_condition_3_enable": True,
+        "buy_condition_4_enable": True,
+        "buy_condition_5_enable": True,
+        "buy_condition_6_enable": True,
+        "buy_condition_7_enable": True,
+        "buy_condition_8_enable": True,
+        "buy_condition_9_enable": True,
+        "buy_condition_10_enable": True,
+        "buy_condition_11_enable": True,
+        "buy_condition_12_enable": True,
+        "buy_condition_13_enable": True,
+        "buy_condition_14_enable": True,
+        "buy_condition_15_enable": True,
+        "buy_condition_16_enable": True,
+        "buy_condition_17_enable": True,
+        "buy_condition_18_enable": True,
+        "buy_condition_19_enable": True,
+        "buy_condition_20_enable": True,
+        "buy_condition_21_enable": True,
+        "buy_condition_22_enable": True,
+        "buy_condition_23_enable": True,
+        "buy_condition_24_enable": True,
+        "buy_condition_25_enable": True,
+        "buy_condition_26_enable": True,
+        "buy_condition_27_enable": True,
+        "buy_condition_28_enable": True,
+        "buy_condition_29_enable": True,
+        "buy_condition_30_enable": True,
+        "buy_condition_31_enable": True,
+        "buy_condition_32_enable": True,
+        "buy_condition_33_enable": True,
+        "buy_condition_34_enable": True,
+        "buy_condition_35_enable": True,
+        "buy_condition_36_enable": True,
+        "buy_condition_37_enable": True,
+        "buy_condition_38_enable": True,
+        "buy_condition_39_enable": True,
+        "buy_condition_40_enable": True,
+        "buy_condition_41_enable": True,
+        "buy_condition_42_enable": True,
+        "buy_condition_43_enable": True,
+        "buy_condition_44_enable": True,
+        "buy_condition_45_enable": True,
+        "buy_condition_46_enable": True,
+        "buy_condition_47_enable": True,
+        "buy_condition_48_enable": True,
+        "buy_condition_49_enable": True,
+        "buy_condition_50_enable": True,
+        "buy_condition_51_enable": True,
+        "buy_condition_52_enable": True,
+        "buy_condition_53_enable": True,
+        "buy_condition_54_enable": True,
+        "buy_condition_55_enable": True,
+        "buy_condition_56_enable": True,
+        "buy_condition_57_enable": True,
+        "buy_condition_58_enable": True,
+        "buy_condition_59_enable": True,
+        "buy_condition_60_enable": True,
+        "buy_condition_61_enable": True,
+        "buy_condition_62_enable": True,
+        "buy_condition_63_enable": True,
+        "buy_condition_64_enable": True,
         "buy_condition_65_enable": True,
         "buy_condition_66_enable": True,
         #############
@@ -9296,7 +9292,6 @@ class NostalgiaForInfinityXw(IStrategy):
                     # Non-Standard protections
 
                     # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
                     item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.045))
                     item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.028))
                     item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.25))
@@ -9394,7 +9389,6 @@ class NostalgiaForInfinityXw(IStrategy):
                     item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.0114))
 
                     # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
                     item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.05))
                     item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.01))
                     item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.5))
@@ -9740,7 +9734,7 @@ class NostalgiaForInfinityXw(IStrategy):
                 elif index == 65:
                     
                     item_buy_logic.append(dataframe['rocr_1h'] > 0.04401)
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift() > 0)
+                    #item_buy_logic.append(dataframe['bb40_2_low'].shift() > 0)
                     item_buy_logic.append(dataframe['bb_delta_cluc'] > dataframe['ha_close'] * 0.061)
                     item_buy_logic.append(dataframe['ha_closedelta'] > dataframe['ha_close'] * 0.04401)
                     item_buy_logic.append(dataframe['tail'] < dataframe['bb_delta_cluc'] * 1.02515)
