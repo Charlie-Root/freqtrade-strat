@@ -103,7 +103,7 @@ else:
 ###########################################################################################################
 
 
-class NostalgiaForInfinityX(IStrategy):
+class NostalgiaForInfinityXw(IStrategy):
     INTERFACE_VERSION = 2
 
     def version(self) -> str:
@@ -163,7 +163,7 @@ class NostalgiaForInfinityX(IStrategy):
 
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = False
+    sell_profit_only = True
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -2027,7 +2027,7 @@ class NostalgiaForInfinityX(IStrategy):
             "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_under_pivot_offset"  : 1.0
          },
-        65: {
+         65: {
             "ema_fast"                  : False,
             "ema_fast_len"              : "12",
             "ema_slow"                  : False,
@@ -2082,7 +2082,7 @@ class NostalgiaForInfinityX(IStrategy):
             "close_over_pivot_offset"   : None,
             "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_under_pivot_offset"  : None
-         }
+        }
     }
 
     # Sell
@@ -2420,9 +2420,9 @@ class NostalgiaForInfinityX(IStrategy):
                 and (last_candle['rsi_14'] > (last_candle['rsi_14_1h'] + 20.0))
                 and (last_candle['sma_200_dec_20'])
                 and (last_candle['sma_200_dec_24'])
-                and (current_time - timedelta(minutes=4320) > trade.open_date_utc)
+                and (current_time - timedelta(minutes=5760) > trade.open_date_utc)
                 # temporary
-                and (trade.open_date_utc + timedelta(minutes=8000) > current_time )
+                and (trade.open_date_utc + timedelta(minutes=9000) > current_time )
         ):
             return True, 'sell_stoploss_u_e_1'
 
@@ -8391,7 +8391,7 @@ class NostalgiaForInfinityX(IStrategy):
         assert self.dp, "DataProvider is required for multiple timeframes."
         # Get the informative pair
         informative_1h = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.info_timeframe_1h)
-        
+
         # Heikin Ashi
         inf_heikinashi = qtpylib.heikinashi(informative_1h)
         informative_1h['ha_close'] = inf_heikinashi['close']
@@ -8556,7 +8556,7 @@ class NostalgiaForInfinityX(IStrategy):
         dataframe['ha_tail'] = (dataframe['ha_close'] - dataframe['ha_low']).abs()
         
         dataframe['rocr'] = ta.ROCR(dataframe['ha_close'], timeperiod=28)
-        
+
         # EMAs
         dataframe['ema_8'] = ta.EMA(dataframe, timeperiod=8)
         dataframe['ema_12'] = ta.EMA(dataframe, timeperiod=12)
@@ -8599,6 +8599,9 @@ class NostalgiaForInfinityX(IStrategy):
         dataframe['bb20_3_mid'] = bb_20_std3['mid']
         dataframe['bb20_3_upp'] = bb_20_std3['upper']
 
+        dataframe['bb20_width'] = ((dataframe['bb20_2_upp'] - dataframe['bb20_2_low']) / dataframe['bb20_2_mid'])
+        dataframe['bb20_delta'] = ((dataframe['bb20_2_low'] - dataframe['bb20_3_low']) / dataframe['bb20_2_low'])
+        
         dataframe['bb20_width'] = ((dataframe['bb20_2_upp'] - dataframe['bb20_2_low']) / dataframe['bb20_2_mid'])
         dataframe['bb20_delta'] = ((dataframe['bb20_2_low'] - dataframe['bb20_3_low']) / dataframe['bb20_2_low'])
         
@@ -9292,6 +9295,7 @@ class NostalgiaForInfinityX(IStrategy):
                     # Non-Standard protections
 
                     # Logic
+                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
                     item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.045))
                     item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.028))
                     item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.25))
@@ -9389,6 +9393,7 @@ class NostalgiaForInfinityX(IStrategy):
                     item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.0114))
 
                     # Logic
+                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
                     item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.05))
                     item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.01))
                     item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.5))
