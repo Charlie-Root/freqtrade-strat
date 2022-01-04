@@ -5,8 +5,9 @@ import rapidjson
 import freqtrade.vendor.qtpylib.indicators as qtpylib
 import numpy as np
 import talib.abstract as ta
+import ta as ta2
 from freqtrade.strategy.interface import IStrategy
-from freqtrade.strategy import merge_informative_pair, timeframe_to_minutes
+from freqtrade.strategy import merge_informative_pair, timeframe_to_minutes, CategoricalParameter, DecimalParameter, IntParameter, stoploss_from_open
 from freqtrade.exchange import timeframe_to_prev_date
 from pandas import DataFrame, Series, concat
 from functools import reduce
@@ -194,7 +195,7 @@ def pmax(df, period, multiplier, length, MAtype, src):
 ###########################################################################################################
 
 
-class NostalgiaForInfinityXw(IStrategy):
+class NostalgiaForInfinityX(IStrategy):
     INTERFACE_VERSION = 2
 
     def version(self) -> str:
@@ -343,9 +344,54 @@ class NostalgiaForInfinityXw(IStrategy):
         "buy_condition_65_enable": True,
         "buy_condition_66_enable": True,
         "buy_condition_67_enable": True,
-        "buy_condition_68_enable": True
+        "buy_condition_68_enable": True,
+        "buy_condition_69_enable": True,
         #############
     }
+    
+    optimizeBuy = True
+    optimizeSell = True
+    buy_real = DecimalParameter(
+        0.001, 0.999, decimals=4, default=0.1058, space='buy', optimize=optimizeBuy)
+    buy_cat = CategoricalParameter(
+        [">R", "=R", "<R"], default='<R', space='buy', optimize=optimizeBuy)
+    
+    
+    ichimoku_window1 = IntParameter(
+        10, 50, default=36, space='buy', optimize=optimizeBuy)
+    
+    ichimoku_window2 = IntParameter(
+        10, 50, default=23, space='buy', optimize=optimizeBuy)
+    
+    sell_real = DecimalParameter(
+        0.001, 0.999, decimals=4, default=0.7414, space='sell', optimize=optimizeSell)
+    sell_cat = CategoricalParameter(
+        [">R", "=R", "<R"], default='=R', space='sell', optimize=optimizeSell)
+    
+    kst_window1 = IntParameter(
+        10, 50, default=45, space='sell', optimize=optimizeSell)
+    
+    kst_window2 = IntParameter(
+        10, 50, default=43, space='sell', optimize=optimizeSell)
+    
+    kst_window3 = IntParameter(
+        10, 50, default=26, space='sell', optimize=optimizeSell)
+    
+    kst_window4 = IntParameter(
+        10, 50, default=32, space='sell', optimize=optimizeSell)
+    
+    kst_roc1 = IntParameter(
+        10, 50, default=45, space='sell', optimize=optimizeSell)
+    
+    kst_roc2 = IntParameter(
+        10, 50, default=43, space='sell', optimize=optimizeSell)
+    
+    kst_roc3 = IntParameter(
+        10, 50, default=26, space='sell', optimize=optimizeSell)
+    
+    kst_roc4 = IntParameter(
+        10, 50, default=32, space='sell', optimize=optimizeSell)
+    
     
     sell_params = {
         #############
@@ -1832,7 +1878,7 @@ class NostalgiaForInfinityXw(IStrategy):
             "safe_pump_6h_threshold"    : 0.5,
             "safe_pump_12h_threshold"   : None,
             "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
+            "safe_pump_36h_threshold"   : 0.7,
             "safe_pump_48h_threshold"   : 1.1,
             "btc_1h_not_downtrend"      : True,
             "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
@@ -2231,6 +2277,34 @@ class NostalgiaForInfinityXw(IStrategy):
             "close_over_pivot_offset"   : None,
             "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_under_pivot_offset"  : None
+        },
+        69: {
+            "ema_fast"                  : False,
+            "ema_fast_len"              : "12",
+            "ema_slow"                  : False,
+            "ema_slow_len"              : "12",
+            "close_above_ema_fast"      : False,
+            "close_above_ema_fast_len"  : "200",
+            "close_above_ema_slow"      : False,
+            "close_above_ema_slow_len"  : "200",
+            "sma200_rising"             : False,
+            "sma200_rising_val"         : "24",
+            "sma200_1h_rising"          : False,
+            "sma200_1h_rising_val"      : "48",
+            "safe_dips_threshold_0"     : 1.0,
+            "safe_dips_threshold_2"     : 1.0,
+            "safe_dips_threshold_12"    : 1.0,
+            "safe_dips_threshold_144"   : 1.0,
+            "safe_pump_6h_threshold"    : 1.0,
+            "safe_pump_12h_threshold"   : 1.0,
+            "safe_pump_24h_threshold"   : 1.0,
+            "safe_pump_36h_threshold"   : 1.0,
+            "safe_pump_48h_threshold"   : 1.0,
+            "btc_1h_not_downtrend"      : True,
+            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
+            "close_over_pivot_offset"   : None,
+            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
+            "close_under_pivot_offset"  : None
         }
     }
 
@@ -2456,6 +2530,21 @@ class NostalgiaForInfinityXw(IStrategy):
         return int(self.timeframe[:-1])
 
     def sell_signals(self, current_profit: float, max_profit:float, max_loss:float, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade: 'Trade', current_time: 'datetime', buy_tag) -> tuple:
+        
+        
+        IND = 'trend_kst_diff'
+        REAL = self.sell_real.value
+        OPR = self.sell_cat.value
+        DFIND = last_candle[IND]
+        #print(buy_tag)
+        if OPR == ">R" and DFIND > REAL:
+            return True, 'sell_signal_Wieger_1'
+        elif OPR == "=R" and np.isclose(DFIND, REAL):
+            return True, 'sell_signal_Wieger_2'
+        elif OPR == "<R" and DFIND < REAL:
+            return True, 'sell_signal_Wieger_3'
+        
+        
         # Sell signal 1
         if (last_candle['rsi_14'] > 79.0) and (last_candle['close'] > last_candle['bb20_2_upp']) and (previous_candle_1['close'] > previous_candle_1['bb20_2_upp']) and (previous_candle_2['close'] > previous_candle_2['bb20_2_upp']) and (previous_candle_3['close'] > previous_candle_3['bb20_2_upp']) and (previous_candle_4['close'] > previous_candle_4['bb20_2_upp']) and (previous_candle_5['close'] > previous_candle_5['bb20_2_upp']):
             if (last_candle['close'] > last_candle['ema_200']):
@@ -5060,6 +5149,7 @@ class NostalgiaForInfinityXw(IStrategy):
             elif (last_candle['r_14'] == 0.0) and (last_candle['rsi_14'] > 65.0) and (last_candle['cmf_15m'] < -0.25):
                 return True, 'sell_profit_w_10_91'
         elif 0.2 > current_profit >= 0.12:
+            
             if (last_candle['r_480'] > -0.5):
                 return True, 'sell_profit_w_11_1'
             elif (last_candle['r_14'] >= -4.0) and (last_candle['r_32'] > -4.0) and (last_candle['r_64'] > -4.0) and (last_candle['rsi_14'] > 77.0):
@@ -8358,6 +8448,12 @@ class NostalgiaForInfinityXw(IStrategy):
         return False, None
 
     def sell_long_mode(self, current_profit: float, max_profit:float, max_loss:float, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade: 'Trade', current_time: 'datetime', buy_tag) -> tuple:
+        
+        # wieger hack
+        
+        #if(np.isclose(last_candle[self.sell_cat.value], self.sell_val0.value)):
+        #    return True, 'sell_long_yolo'
+        
         # Original sell signals
         sell, signal_name = self.sell_signals(current_profit, max_profit, max_loss, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade, current_time, buy_tag)
         if sell and (signal_name is not None):
@@ -8367,6 +8463,27 @@ class NostalgiaForInfinityXw(IStrategy):
         sell, signal_name = self.sell_stoploss(current_profit, max_profit, max_loss, last_candle, previous_candle_1, trade, current_time)
         if sell and (signal_name is not None):
             return True, signal_name
+        
+        IND = 'trend_kst_diff'
+        REAL = self.sell_real.value
+        OPR = self.sell_cat.value
+        DFIND = last_candle[IND]
+        # print(DFIND.mean())
+
+        if OPR == ">R" and DFIND > REAL:
+            return True, 'sell_profit_w_12_long_Wieger_1'
+        elif OPR == "=R" and np.isclose(DFIND, REAL):
+            return True, 'sell_profit_w_12_long_Wieger_2'
+        elif OPR == "<R" and DFIND < REAL:
+            return True, 'sell_profit_w_12_long_Wieger_Final'
+        
+        #if (last_candle[self.sell_cat.value] > self.sell_val0.value):
+        #        return True, 'sell_profit_w_12_long_Wieger'
+        
+        #if(np.isclose(last_candle[self.sell_cat.value], 0.9455)):
+        #    return True, 'sell_long_yolo'
+
+        return False, None
 
         if (0.0 < current_profit <= 0.02) and (max_profit - current_profit > 0.025) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_0'
@@ -8417,7 +8534,7 @@ class NostalgiaForInfinityXw(IStrategy):
         max_loss = ((trade.open_rate - trade.min_rate) / trade.min_rate)
 
         # Long mode
-        if all(c in ['31', '32', '33', '34', '35', '36'] for c in buy_tags):
+        if all(c in ['31', '32', '33', '34', '35', '36', '69'] for c in buy_tags):
             sell, signal_name = self.sell_long_mode(current_profit, max_profit, max_loss, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade, current_time, buy_tag)
             if sell and (signal_name is not None):
                 return f"{signal_name} ( {buy_tag})"
@@ -8729,6 +8846,38 @@ class NostalgiaForInfinityXw(IStrategy):
         dataframe['ema_50'] = ta.EMA(dataframe, timeperiod=50)
         dataframe['ema_100'] = ta.EMA(dataframe, timeperiod=100)
         dataframe['ema_200'] = ta.EMA(dataframe, timeperiod=200)
+        
+        dataframe['trend_ichimoku_base'] = ta2.trend.ichimoku_base_line(
+            dataframe['high'],
+            dataframe['low'],
+            window1=self.ichimoku_window1.value,
+            window2=self.ichimoku_window2.value,
+            visual=False,
+            fillna=False
+        )
+        KST = ta2.trend.KSTIndicator(
+            close=dataframe['close'],
+            roc1=self.kst_roc1.value,
+            roc2=self.kst_roc2.value,
+            roc3=self.kst_roc3.value,
+            roc4=self.kst_roc4.value,
+            window1=self.kst_window1.value,
+            window2=self.kst_window2.value,
+            window3=self.kst_window3.value,
+            window4=self.kst_window4.value,
+            nsig=9,
+            fillna=False
+        )
+        
+        dataframe['trend_kst_diff'] = KST.kst_diff()
+        
+        # Normalisation
+        tib = dataframe['trend_ichimoku_base']
+        dataframe['trend_ichimoku_base'] = (
+            tib-tib.min())/(tib.max()-tib.min())
+        
+        tkd = dataframe['trend_kst_diff']
+        dataframe['trend_kst_diff'] = (tkd-tkd.min())/(tkd.max()-tkd.min())
         
         # SMA
         dataframe['sma_15'] = ta.SMA(dataframe, timeperiod=15)
@@ -9937,6 +10086,22 @@ class NostalgiaForInfinityXw(IStrategy):
                     item_buy_logic.append(dataframe['cti'] < -0.95)
                     item_buy_logic.append(dataframe['r_14'] < -97)
                     item_buy_logic.append(dataframe['crsi_1h'] > 0.5)
+                
+                elif index == 69:
+                    
+                    IND = 'trend_ichimoku_base'
+                    REAL = self.buy_real.value
+                    OPR = self.buy_cat.value
+                    DFIND = dataframe[IND]
+                    # print(DFIND.mean())
+                    
+                    if OPR == ">R":
+                        item_buy_logic.append(DFIND > REAL)
+                    elif OPR == "=R":
+                        item_buy_logic.append(np.isclose(DFIND, REAL))
+                    elif OPR == "<R":
+                        item_buy_logic.append(DFIND < REAL)
+                    
 
                 item_buy_logic.append(dataframe['volume'] > 0)
                 item_buy = reduce(lambda x, y: x & y, item_buy_logic)
