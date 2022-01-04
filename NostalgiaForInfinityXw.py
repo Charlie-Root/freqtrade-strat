@@ -195,7 +195,7 @@ def pmax(df, period, multiplier, length, MAtype, src):
 ###########################################################################################################
 
 
-class NostalgiaForInfinityX(IStrategy):
+class NostalgiaForInfinityXw(IStrategy):
     INTERFACE_VERSION = 2
 
     def version(self) -> str:
