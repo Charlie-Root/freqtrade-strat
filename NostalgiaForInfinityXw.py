@@ -195,7 +195,7 @@ def pmax(df, period, multiplier, length, MAtype, src):
 ###########################################################################################################
 
 
-class NostalgiaForInfinityXw(IStrategy):
+class NostalgiaForInfinityX(IStrategy):
     INTERFACE_VERSION = 2
 
     def version(self) -> str:
@@ -349,8 +349,11 @@ class NostalgiaForInfinityXw(IStrategy):
         #############
     }
     
-    optimizeBuy = True
-    optimizeSell = True
+    optimizeBuy = False
+    optimizeSell = False
+    optimizePump = False
+    optimizeDump = True
+    
     buy_real = DecimalParameter(
         0.001, 0.999, decimals=4, default=0.1058, space='buy', optimize=optimizeBuy)
     buy_cat = CategoricalParameter(
@@ -392,6 +395,32 @@ class NostalgiaForInfinityXw(IStrategy):
     kst_roc4 = IntParameter(
         10, 50, default=32, space='sell', optimize=optimizeSell)
     
+    safe_dips_threshold_0 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.35, space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_2 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.13, space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_12 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.35, space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_144 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.84, space='buy', optimize=optimizeDump)
+    
+    safe_pump_6h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.26, space='buy', optimize=optimizePump)
+    
+    safe_pump_12h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.62, space='buy', optimize=optimizePump)
+    
+    safe_pump_24h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.22, space='buy', optimize=optimizePump)
+    
+    safe_pump_36h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.51, space='buy', optimize=optimizePump)
+    
+    safe_pump_48h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=0.22, space='buy', optimize=optimizePump)
     
     sell_params = {
         #############
@@ -2291,15 +2320,15 @@ class NostalgiaForInfinityXw(IStrategy):
             "sma200_rising_val"         : "24",
             "sma200_1h_rising"          : False,
             "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 1.0,
-            "safe_dips_threshold_2"     : 1.0,
-            "safe_dips_threshold_12"    : 1.0,
-            "safe_dips_threshold_144"   : 1.0,
-            "safe_pump_6h_threshold"    : 1.0,
-            "safe_pump_12h_threshold"   : 1.0,
-            "safe_pump_24h_threshold"   : 1.0,
-            "safe_pump_36h_threshold"   : 1.0,
-            "safe_pump_48h_threshold"   : 1.0,
+            "safe_dips_threshold_0"     : safe_dips_threshold_0.value,
+            "safe_dips_threshold_2"     : safe_dips_threshold_2.value,
+            "safe_dips_threshold_12"    : safe_dips_threshold_12.value,
+            "safe_dips_threshold_144"   : safe_dips_threshold_144.value,
+            "safe_pump_6h_threshold"    : safe_pump_6h_threshold.value,
+            "safe_pump_12h_threshold"   : safe_pump_12h_threshold.value,
+            "safe_pump_24h_threshold"   : safe_pump_24h_threshold.value,
+            "safe_pump_36h_threshold"   : safe_pump_36h_threshold.value,
+            "safe_pump_48h_threshold"   : safe_pump_48h_threshold.value,
             "btc_1h_not_downtrend"      : True,
             "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_over_pivot_offset"   : None,
