@@ -346,88 +346,169 @@ class NostalgiaForInfinityXw(IStrategy):
         "buy_condition_67_enable": True,
         "buy_condition_68_enable": True,
         "buy_condition_69_enable": True,
+        "btc_uptrend": True,
+        "buy_cat": "<R",
+        "buy_real": 0.3786,
+        "close_above_ema_fast": False,
+        "close_above_ema_fast_len": "25",
+        "close_above_ema_slow": True,
+        "close_above_ema_slow_len": "100",
+        "ema_fast": False,
+        "ema_fast_len": "25",
+        "ema_slow": True,
+        "ema_slow_len": "12",
+        "ichimoku_window1": 49,
+        "ichimoku_window2": 13,
+        "safe_dips_threshold_0": 0.79,
+        "safe_dips_threshold_12": 0.46,
+        "safe_dips_threshold_144": 0.57,
+        "safe_dips_threshold_2": 0.33,
+        "safe_pump_12h_threshold": 0.3,
+        "safe_pump_24h_threshold": 0.96,
+        "safe_pump_36h_threshold": 0.57,
+        "safe_pump_48h_threshold": 0.72,
+        "safe_pump_6h_threshold": 0.55,
+        "sma200_1h_rising": True,
+        "sma200_1h_rising_val": 81,
+        "sma200_rising": True,
+        "sma200_rising_val": 156,
         #############
     }
-    
-    optimizeBuy = False
-    optimizeSell = False
-    optimizePump = False
-    optimizeDump = True
-    
-    buy_real = DecimalParameter(
-        0.001, 0.999, decimals=4, default=0.1058, space='buy', optimize=optimizeBuy)
-    buy_cat = CategoricalParameter(
-        [">R", "=R", "<R"], default='<R', space='buy', optimize=optimizeBuy)
-    
-    
-    ichimoku_window1 = IntParameter(
-        10, 50, default=36, space='buy', optimize=optimizeBuy)
-    
-    ichimoku_window2 = IntParameter(
-        10, 50, default=23, space='buy', optimize=optimizeBuy)
-    
-    sell_real = DecimalParameter(
-        0.001, 0.999, decimals=4, default=0.7414, space='sell', optimize=optimizeSell)
-    sell_cat = CategoricalParameter(
-        [">R", "=R", "<R"], default='=R', space='sell', optimize=optimizeSell)
-    
-    kst_window1 = IntParameter(
-        10, 50, default=45, space='sell', optimize=optimizeSell)
-    
-    kst_window2 = IntParameter(
-        10, 50, default=43, space='sell', optimize=optimizeSell)
-    
-    kst_window3 = IntParameter(
-        10, 50, default=26, space='sell', optimize=optimizeSell)
-    
-    kst_window4 = IntParameter(
-        10, 50, default=32, space='sell', optimize=optimizeSell)
-    
-    kst_roc1 = IntParameter(
-        10, 50, default=45, space='sell', optimize=optimizeSell)
-    
-    kst_roc2 = IntParameter(
-        10, 50, default=43, space='sell', optimize=optimizeSell)
-    
-    kst_roc3 = IntParameter(
-        10, 50, default=26, space='sell', optimize=optimizeSell)
-    
-    kst_roc4 = IntParameter(
-        10, 50, default=32, space='sell', optimize=optimizeSell)
-    
-    safe_dips_threshold_0 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.35, space='buy', optimize=optimizeDump)
-    
-    safe_dips_threshold_2 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.13, space='buy', optimize=optimizeDump)
-    
-    safe_dips_threshold_12 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.35, space='buy', optimize=optimizeDump)
-    
-    safe_dips_threshold_144 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.84, space='buy', optimize=optimizeDump)
-    
-    safe_pump_6h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.26, space='buy', optimize=optimizePump)
-    
-    safe_pump_12h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.62, space='buy', optimize=optimizePump)
-    
-    safe_pump_24h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.22, space='buy', optimize=optimizePump)
-    
-    safe_pump_36h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.51, space='buy', optimize=optimizePump)
-    
-    safe_pump_48h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=0.22, space='buy', optimize=optimizePump)
     
     sell_params = {
         #############
         # Enable/Disable conditions
         "sell_condition_1_enable": True,
+        "kst_roc1": 32,
+        "kst_roc2": 47,
+        "kst_roc3": 49,
+        "kst_roc4": 43,
+        "kst_window1": 36,
+        "kst_window2": 10,
+        "kst_window3": 24,
+        "kst_window4": 24,
+        "sell_cat": "=R",
+        "sell_real": 0.2841,
         #############
     }
+    
+    optimizeBuy = True
+    optimizeSell = True
+    optimizePump = True
+    optimizeDump = True
+    
+    
+    ema_fast = CategoricalParameter(
+        [True, False], default=buy_params["ema_fast"], space='buy', optimize=optimizeBuy)
+    
+    ema_fast_len = CategoricalParameter(
+        ["8", "12", "16", "20", "25", "50", "100", "200"], default=buy_params["ema_fast_len"], space='buy', optimize=optimizeBuy)
+    
+    ema_slow = CategoricalParameter(
+        [True, False], default=buy_params["ema_slow"], space='buy', optimize=optimizeBuy)
+    
+    ema_slow_len = CategoricalParameter(
+        ["8", "12", "20", "25", "50", "100", "200"], default=buy_params["ema_slow_len"], space='buy', optimize=optimizeBuy)
+    
+    close_above_ema_fast = CategoricalParameter(
+        [True, False], default=buy_params["close_above_ema_fast"], space='buy', optimize=optimizeBuy)
+    
+    close_above_ema_fast_len = CategoricalParameter(
+        ["8", "12", "20", "25", "50", "100", "200"], default=buy_params["close_above_ema_fast_len"], space='buy', optimize=optimizeBuy)
+   
+    close_above_ema_slow = CategoricalParameter(
+        [True, False], default=buy_params["close_above_ema_slow"], space='buy', optimize=optimizeBuy)
+    
+    close_above_ema_slow_len = CategoricalParameter(
+        ["8", "12", "20", "25", "50", "100", "200"], default=20, space='buy', optimize=optimizeBuy)
+    
+    sma200_rising = CategoricalParameter(
+        [True, False], default=buy_params["sma200_rising"], space='buy', optimize=optimizeBuy)
+    
+    sma200_rising_val = IntParameter(
+        10, 400, default=buy_params["sma200_rising_val"], space='buy', optimize=optimizeBuy)
+    
+    sma200_1h_rising = CategoricalParameter(
+        [True, False], default=buy_params["sma200_1h_rising"], space='buy', optimize=optimizeBuy)
+    
+    sma200_1h_rising_val = IntParameter(
+        10, 400, default=buy_params["sma200_1h_rising_val"], space='buy', optimize=optimizeBuy)
+    
+    
+    btc_uptrend = CategoricalParameter(
+        [True, False], default=buy_params["btc_uptrend"], space='buy', optimize=optimizeBuy)
+    
+    
+    buy_real = DecimalParameter(
+        0.001, 0.999, decimals=4, default=buy_params["buy_real"], space='buy', optimize=optimizeBuy)
+    
+    buy_cat = CategoricalParameter(
+        [">R", "=R", "<R"], default=buy_params["buy_cat"], space='buy', optimize=optimizeBuy)
+    
+    
+    ichimoku_window1 = IntParameter(
+        10, 50, default=buy_params["ichimoku_window1"], space='buy', optimize=optimizeBuy)
+    
+    ichimoku_window2 = IntParameter(
+        10, 50, default=buy_params["ichimoku_window2"], space='buy', optimize=optimizeBuy)
+    
+    sell_real = DecimalParameter(
+        0.001, 0.999, decimals=4, default=sell_params["sell_real"], space='sell', optimize=optimizeSell)
+    sell_cat = CategoricalParameter(
+        [">R", "=R", "<R"], default=sell_params["sell_cat"], space='sell', optimize=optimizeSell)
+    
+    kst_window1 = IntParameter(
+        10, 50, default=sell_params["kst_window1"], space='sell', optimize=optimizeSell)
+    
+    kst_window2 = IntParameter(
+        10, 50, default=sell_params["kst_window2"], space='sell', optimize=optimizeSell)
+    
+    kst_window3 = IntParameter(
+        10, 50, default=sell_params["kst_window3"], space='sell', optimize=optimizeSell)
+    
+    kst_window4 = IntParameter(
+        10, 50, default=sell_params["kst_window4"], space='sell', optimize=optimizeSell)
+    
+    kst_roc1 = IntParameter(
+        10, 50, default=sell_params["kst_roc1"], space='sell', optimize=optimizeSell)
+    
+    kst_roc2 = IntParameter(
+        10, 50, default=sell_params["kst_roc2"], space='sell', optimize=optimizeSell)
+    
+    kst_roc3 = IntParameter(
+        10, 50, default=sell_params["kst_roc3"], space='sell', optimize=optimizeSell)
+    
+    kst_roc4 = IntParameter(
+        10, 50, default=sell_params["kst_roc4"], space='sell', optimize=optimizeSell)
+    
+    safe_dips_threshold_0 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_0"], space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_2 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_2"], space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_12 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_12"], space='buy', optimize=optimizeDump)
+    
+    safe_dips_threshold_144 = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_144"], space='buy', optimize=optimizeDump)
+    
+    safe_pump_6h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_pump_6h_threshold"], space='buy', optimize=optimizePump)
+    
+    safe_pump_12h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_pump_12h_threshold"], space='buy', optimize=optimizePump)
+    
+    safe_pump_24h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_pump_24h_threshold"], space='buy', optimize=optimizePump)
+    
+    safe_pump_36h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_pump_36h_threshold"], space='buy', optimize=optimizePump)
+    
+    safe_pump_48h_threshold = DecimalParameter(
+        0.01, 1.0, decimals=2, default=buy_params["safe_pump_48h_threshold"], space='buy', optimize=optimizePump)
+    
+    
 
     #############################################################
     buy_protection_params = {
@@ -2308,17 +2389,17 @@ class NostalgiaForInfinityXw(IStrategy):
             "close_under_pivot_offset"  : None
         },
         69: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
+            "ema_fast"                  : ema_fast.value,
+            "ema_fast_len"              : ema_fast_len.value,
+            "ema_slow"                  : ema_slow.value,
+            "ema_slow_len"              : ema_slow_len.value,
+            "close_above_ema_fast"      : close_above_ema_fast.value,
+            "close_above_ema_fast_len"  : close_above_ema_fast_len.value,
+            "close_above_ema_slow"      : close_above_ema_slow.value,
+            "close_above_ema_slow_len"  : close_above_ema_slow_len.value,
+            "sma200_rising"             : sma200_rising.value,
+            "sma200_rising_val"         : sma200_rising_val.value,
+            "sma200_1h_rising"          : sma200_1h_rising.value,
             "sma200_1h_rising_val"      : "48",
             "safe_dips_threshold_0"     : safe_dips_threshold_0.value,
             "safe_dips_threshold_2"     : safe_dips_threshold_2.value,
@@ -2329,7 +2410,7 @@ class NostalgiaForInfinityXw(IStrategy):
             "safe_pump_24h_threshold"   : safe_pump_24h_threshold.value,
             "safe_pump_36h_threshold"   : safe_pump_36h_threshold.value,
             "safe_pump_48h_threshold"   : safe_pump_48h_threshold.value,
-            "btc_1h_not_downtrend"      : True,
+            "btc_1h_not_downtrend"      : btc_uptrend.value,
             "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_over_pivot_offset"   : None,
             "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
