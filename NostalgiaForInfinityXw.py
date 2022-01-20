@@ -220,6 +220,7 @@ class NostalgiaForInfinityXw(IStrategy):
     timeframe = '5m'
     res_timeframe = 'none'
     info_timeframe_1d = '1d'
+    info_timeframe_4h = '4h'
     info_timeframe_1h = '1h'
     info_timeframe_15m = '15m'
 
@@ -253,9 +254,16 @@ class NostalgiaForInfinityXw(IStrategy):
     # Run "populate_indicators()" only for new candle.
     process_only_new_candles = True
 
+    # dca
+    #position_adjustment_enable = True
+
+    # Example specific variables
+    #max_dca_orders = 3
+    #max_dca_multiplier = 5.5
+    
     # These values can be overridden in the "ask_strategy" section in the config.
     use_sell_signal = True
-    sell_profit_only = True
+    sell_profit_only = False
     ignore_roi_if_buy_signal = True
 
     # Number of candles the strategy requires before producing valid signals
@@ -277,101 +285,38 @@ class NostalgiaForInfinityXw(IStrategy):
     buy_params = {
         #############
         # Enable/Disable conditions
-        "buy_condition_1_enable": True,
-        "buy_condition_2_enable": True,
-        "buy_condition_3_enable": True,
-        "buy_condition_4_enable": True,
-        "buy_condition_5_enable": True,
-        "buy_condition_6_enable": True,
-        "buy_condition_7_enable": True,
-        "buy_condition_8_enable": True,
-        "buy_condition_9_enable": True,
-        "buy_condition_10_enable": True,
-        "buy_condition_11_enable": True,
-        "buy_condition_12_enable": True,
-        "buy_condition_13_enable": True,
-        "buy_condition_14_enable": True,
-        "buy_condition_15_enable": True,
-        "buy_condition_16_enable": True,
-        "buy_condition_17_enable": True,
-        "buy_condition_18_enable": True,
-        "buy_condition_19_enable": True,
-        "buy_condition_20_enable": True,
-        "buy_condition_21_enable": True,
-        "buy_condition_22_enable": True,
-        "buy_condition_23_enable": True,
-        "buy_condition_24_enable": True,
-        "buy_condition_25_enable": True,
-        "buy_condition_26_enable": True,
-        "buy_condition_27_enable": True,
-        "buy_condition_28_enable": True,
-        "buy_condition_29_enable": True,
-        "buy_condition_30_enable": True,
-        "buy_condition_31_enable": True,
-        "buy_condition_32_enable": True,
-        "buy_condition_33_enable": True,
-        "buy_condition_34_enable": True,
-        "buy_condition_35_enable": True,
-        "buy_condition_36_enable": True,
-        "buy_condition_37_enable": True,
-        "buy_condition_38_enable": True,
-        "buy_condition_39_enable": True,
-        "buy_condition_40_enable": True,
-        "buy_condition_41_enable": True,
-        "buy_condition_42_enable": True,
-        "buy_condition_43_enable": True,
-        "buy_condition_44_enable": True,
-        "buy_condition_45_enable": True,
-        "buy_condition_46_enable": True,
-        "buy_condition_47_enable": True,
-        "buy_condition_48_enable": True,
-        "buy_condition_49_enable": True,
-        "buy_condition_50_enable": True,
-        "buy_condition_51_enable": True,
-        "buy_condition_52_enable": True,
-        "buy_condition_53_enable": True,
-        "buy_condition_54_enable": True,
-        "buy_condition_55_enable": True,
-        "buy_condition_56_enable": True,
-        "buy_condition_57_enable": True,
-        "buy_condition_58_enable": True,
-        "buy_condition_59_enable": True,
-        "buy_condition_60_enable": True,
-        "buy_condition_61_enable": True,
-        "buy_condition_62_enable": True,
-        "buy_condition_63_enable": True,
-        "buy_condition_64_enable": True,
-        "buy_condition_65_enable": True,
-        "buy_condition_66_enable": True,
-        "buy_condition_67_enable": True,
-        "buy_condition_68_enable": True,
         "buy_condition_69_enable": True,
         "btc_uptrend": False,
         "buy_cat": "<R",
-        "buy_real": 0.7026,
-        "close_above_ema_fast": False,
-        "close_above_ema_fast_len": "8",
-        "close_above_ema_slow": False,
+        "buy_real": 0.0292,
+        "close_above_ema_fast": True,
+        "close_above_ema_fast_len": "100",
+        "close_above_ema_slow": True,
         "close_above_ema_slow_len": "100",
-        "ema_fast": True,
-        "ema_fast_len": "20",
+        "ema_fast": False,
+        "ema_fast_len": "50",
         "ema_slow": False,
         "ema_slow_len": "20",
-        "ichimoku_window1": 12,
-        "ichimoku_window2": 50,
-        "safe_dips_threshold_0": 0.73,
-        "safe_dips_threshold_12": 0.24,
-        "safe_dips_threshold_144": 0.63,
-        "safe_dips_threshold_2": 0.65,
-        "safe_pump_12h_threshold": 0.7,
-        "safe_pump_24h_threshold": 0.7,
-        "safe_pump_36h_threshold": 0.22,
-        "safe_pump_48h_threshold": 0.7,
-        "safe_pump_6h_threshold": 0.2,
+        "ichimoku_window1": 105,
+        "ichimoku_window2": 88,
+        "safe_dips_threshold_0": 0.385,
+        "safe_dips_threshold_12": 0.534,
+        "safe_dips_threshold_144": 1.087,
+        "safe_dips_threshold_2": 1.195,
+        "safe_pump_12h_threshold": 0.01,
+        "safe_pump_24h_threshold": 1.927,
+        "safe_pump_36h_threshold": 1.324,
+        "safe_pump_48h_threshold": 1.018,
+        "safe_pump_6h_threshold": 1.716,
         "sma200_1h_rising": True,
-        "sma200_1h_rising_val": 207,
-        "sma200_rising": False,
-        "sma200_rising_val": 179,
+        "sma200_1h_rising_val": 43,
+        "sma200_rising": True,
+        "sma200_rising_val": 34,
+        "close_over_pivot_offset": 0.1,  # value loaded from strategy
+        "close_over_pivot_type": "none",  # value loaded from strategy
+        "close_under_pivot_offset": 0.5,  # value loaded from strategy
+        "close_under_pivot_type": "none",  # value loaded from strategy
+        
         #############
     }
     
@@ -379,16 +324,8 @@ class NostalgiaForInfinityXw(IStrategy):
         #############
         # Enable/Disable conditions
         "sell_condition_1_enable": True,
-        "kst_roc1": 45,
-        "kst_roc2": 40,
-        "kst_roc3": 13,
-        "kst_roc4": 16,
-        "kst_window1": 50,
-        "kst_window2": 40,
-        "kst_window3": 32,
-        "kst_window4": 23,
-        "sell_cat": ">R",
-        "sell_real": 0.4439,
+        "sell_long_t_0": True,
+        "sell_long_t_1": False,
         #############
     }
     
@@ -402,1992 +339,105 @@ class NostalgiaForInfinityXw(IStrategy):
         [True, False], default=buy_params["ema_fast"], space='buy', optimize=optimizeBuy)
     
     ema_fast_len = CategoricalParameter(
-        ["8", "12", "16", "20", "25", "50", "100", "200"], default=buy_params["ema_fast_len"], space='buy', optimize=optimizeBuy)
+        ["12", "20", "25", "50", "100", "200"], default=buy_params["ema_fast_len"], space='buy', optimize=optimizeBuy)
     
     ema_slow = CategoricalParameter(
         [True, False], default=buy_params["ema_slow"], space='buy', optimize=optimizeBuy)
     
     ema_slow_len = CategoricalParameter(
-        ["8", "12", "20", "25", "50", "100", "200"], default=buy_params["ema_slow_len"], space='buy', optimize=optimizeBuy)
+        ["12", "20", "25", "50", "100", "200"], default=buy_params["ema_slow_len"], space='buy', optimize=optimizeBuy)
     
     close_above_ema_fast = CategoricalParameter(
         [True, False], default=buy_params["close_above_ema_fast"], space='buy', optimize=optimizeBuy)
     
     close_above_ema_fast_len = CategoricalParameter(
-        ["8", "12", "20", "25", "50", "100", "200"], default=buy_params["close_above_ema_fast_len"], space='buy', optimize=optimizeBuy)
+        ["12", "20", "25", "50", "100", "200"], default=buy_params["close_above_ema_fast_len"], space='buy', optimize=optimizeBuy)
    
     close_above_ema_slow = CategoricalParameter(
         [True, False], default=buy_params["close_above_ema_slow"], space='buy', optimize=optimizeBuy)
     
     close_above_ema_slow_len = CategoricalParameter(
-        ["8", "12", "20", "25", "50", "100", "200"], default=20, space='buy', optimize=optimizeBuy)
+        ["12", "20", "25", "50", "100", "200"], default=buy_params["close_above_ema_slow_len"], space='buy', optimize=optimizeBuy)
     
     sma200_rising = CategoricalParameter(
         [True, False], default=buy_params["sma200_rising"], space='buy', optimize=optimizeBuy)
     
     sma200_rising_val = IntParameter(
-        10, 400, default=buy_params["sma200_rising_val"], space='buy', optimize=optimizeBuy)
+        10, 300, default=buy_params["sma200_rising_val"], space='buy', optimize=optimizeBuy)
     
     sma200_1h_rising = CategoricalParameter(
         [True, False], default=buy_params["sma200_1h_rising"], space='buy', optimize=optimizeBuy)
     
     sma200_1h_rising_val = IntParameter(
-        10, 400, default=buy_params["sma200_1h_rising_val"], space='buy', optimize=optimizeBuy)
-    
+        10, 300, default=buy_params["sma200_1h_rising_val"], space='buy', optimize=optimizeBuy)
     
     btc_uptrend = CategoricalParameter(
         [True, False], default=buy_params["btc_uptrend"], space='buy', optimize=optimizeBuy)
     
     
     buy_real = DecimalParameter(
-        0.001, 0.999, decimals=4, default=buy_params["buy_real"], space='buy', optimize=optimizeBuy)
+        0.001, 2.5, decimals=4, default=buy_params["buy_real"], space='buy', optimize=optimizeBuy)
     
     buy_cat = CategoricalParameter(
         [">R", "=R", "<R"], default=buy_params["buy_cat"], space='buy', optimize=optimizeBuy)
     
     
     ichimoku_window1 = IntParameter(
-        10, 50, default=buy_params["ichimoku_window1"], space='buy', optimize=optimizeBuy)
+        10, 200, default=buy_params["ichimoku_window1"], space='buy', optimize=optimizeBuy)
     
     ichimoku_window2 = IntParameter(
-        10, 50, default=buy_params["ichimoku_window2"], space='buy', optimize=optimizeBuy)
+        10, 200, default=buy_params["ichimoku_window2"], space='buy', optimize=optimizeBuy)
     
-    sell_real = DecimalParameter(
-        0.001, 0.999, decimals=4, default=sell_params["sell_real"], space='sell', optimize=optimizeSell)
-    sell_cat = CategoricalParameter(
-        [">R", "=R", "<R"], default=sell_params["sell_cat"], space='sell', optimize=optimizeSell)
     
-    kst_window1 = IntParameter(
-        10, 50, default=sell_params["kst_window1"], space='sell', optimize=optimizeSell)
-    
-    kst_window2 = IntParameter(
-        10, 50, default=sell_params["kst_window2"], space='sell', optimize=optimizeSell)
-    
-    kst_window3 = IntParameter(
-        10, 50, default=sell_params["kst_window3"], space='sell', optimize=optimizeSell)
-    
-    kst_window4 = IntParameter(
-        10, 50, default=sell_params["kst_window4"], space='sell', optimize=optimizeSell)
-    
-    kst_roc1 = IntParameter(
-        10, 50, default=sell_params["kst_roc1"], space='sell', optimize=optimizeSell)
-    
-    kst_roc2 = IntParameter(
-        10, 50, default=sell_params["kst_roc2"], space='sell', optimize=optimizeSell)
-    
-    kst_roc3 = IntParameter(
-        10, 50, default=sell_params["kst_roc3"], space='sell', optimize=optimizeSell)
-    
-    kst_roc4 = IntParameter(
-        10, 50, default=sell_params["kst_roc4"], space='sell', optimize=optimizeSell)
     
     safe_dips_threshold_0 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_0"], space='buy', optimize=optimizeDump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_dips_threshold_0"], space='buy', optimize=optimizeDump)
     
     safe_dips_threshold_2 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_2"], space='buy', optimize=optimizeDump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_dips_threshold_2"], space='buy', optimize=optimizeDump)
     
     safe_dips_threshold_12 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_12"], space='buy', optimize=optimizeDump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_dips_threshold_12"], space='buy', optimize=optimizeDump)
     
     safe_dips_threshold_144 = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_dips_threshold_144"], space='buy', optimize=optimizeDump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_dips_threshold_144"], space='buy', optimize=optimizeDump)
     
     safe_pump_6h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_pump_6h_threshold"], space='buy', optimize=optimizePump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_pump_6h_threshold"], space='buy', optimize=optimizePump)
     
     safe_pump_12h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_pump_12h_threshold"], space='buy', optimize=optimizePump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_pump_12h_threshold"], space='buy', optimize=optimizePump)
     
     safe_pump_24h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_pump_24h_threshold"], space='buy', optimize=optimizePump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_pump_24h_threshold"], space='buy', optimize=optimizePump)
     
     safe_pump_36h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_pump_36h_threshold"], space='buy', optimize=optimizePump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_pump_36h_threshold"], space='buy', optimize=optimizePump)
     
     safe_pump_48h_threshold = DecimalParameter(
-        0.01, 1.0, decimals=2, default=buy_params["safe_pump_48h_threshold"], space='buy', optimize=optimizePump)
+        0.01, 2.0, decimals=3, default=buy_params["safe_pump_48h_threshold"], space='buy', optimize=optimizePump)
     
+    close_over_pivot_type = CategoricalParameter(
+        ["none", "pivot", "sup1", "sup2", "sup3", "res1", "res2", "res3"], default=buy_params["close_over_pivot_type"], space='buy', optimize=False)
+    
+    close_over_pivot_offset = CategoricalParameter(
+        [0.1, 0.5, 1.0], default=buy_params["close_over_pivot_offset"], space='buy', optimize=False)
+    
+    close_under_pivot_type = CategoricalParameter(
+        ["none", "pivot", "sup1", "sup2", "sup3", "res1", "res2", "res3"], default=buy_params["close_under_pivot_type"], space='buy', optimize=False)
+    
+    close_under_pivot_offset = CategoricalParameter(
+        [0.1, 0.5, 1.0], default=buy_params["close_under_pivot_offset"], space='buy', optimize=False)
+    
+    sell_long_t_0 = CategoricalParameter(
+        [True, False], default=sell_params["sell_long_t_0"], space='sell', optimize=optimizeSell)
+    
+    sell_long_t_1 = CategoricalParameter(
+        [True, False], default=sell_params["sell_long_t_1"], space='sell', optimize=optimizeSell)
     
 
     #############################################################
     buy_protection_params = {
-        1: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : None,
-            "safe_dips_threshold_2"     : 0.06,
-            "safe_dips_threshold_12"    : 0.24,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.36,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 1.2,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 2.0,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        2: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "20",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.06,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.32,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        3: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "20",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.06,
-            "safe_dips_threshold_12"    : 0.2,
-            "safe_dips_threshold_144"   : 0.25,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.5,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 0.9,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        4: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.54,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.6,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.7,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        5: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.68,
-            "safe_pump_36h_threshold"   : 0.74,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        6: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.78,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.3,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "pivot", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.98,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        7: {
-            "ema_fast"                  : True,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.022,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.8,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.98,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.6
-        },
-        8: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.74,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.98,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.6
-        },
-        9: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "28",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : 1.2,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        10: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : True,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        11: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.14,
-            "safe_dips_threshold_144"   : 0.24,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.88,
-            "safe_pump_48h_threshold"   : 1.1,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "sup3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.06,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        12: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.13,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : 0.5,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : 1.8,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        13: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.48,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : 0.52,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        14: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "44",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "72",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.48,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        15: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : True,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.48,
-            "safe_dips_threshold_144"   : 0.9,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        16: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.02,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        17: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.25,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.25,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        18: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.14,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.35,
-            "safe_pump_12h_threshold"   : 0.45,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.65,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        19: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "100",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.026,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.35,
-            "safe_pump_12h_threshold"   : 0.45,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        20: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : None,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : 0.35,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        21: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : None,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.6,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        22: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.6,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        23: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.2,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        24: {
-            "ema_fast"                  : True,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.4,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.1
-        },
-        25: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "36",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        26: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 1.0,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        27: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : 0.5,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        28: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 1.9,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        29: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        30: {
-            "ema_fast"                  : True,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.28,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        31: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.024,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.44,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        32: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.26,
-            "safe_dips_threshold_144"   : 0.3,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.78,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        33: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.8,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.07
-        },
-        34: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.066,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        35: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.028,
-            "safe_dips_threshold_2"     : 0.066,
-            "safe_dips_threshold_12"    : 0.32,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        36: {
-            "ema_fast"                  : True,
-            "ema_fast_len"              : "16",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.14,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.6,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.45
-        },
-        37: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.14,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.2
-        },
-        38: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "16",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.13,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.45,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 2.0,
-            "safe_pump_36h_threshold"   : 2.0,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.8
-        },
-        39: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : 0.54,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.25
-        },
-        40: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "30",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : None,
-            "safe_dips_threshold_12"    : 0.3,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.55,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.67,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        41: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.08,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : 3.2,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        42: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : 0.4,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.1,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        43: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : None,
-            "safe_pump_12h_threshold"   : 0.9,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.0,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "sup3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.99,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        44: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : True,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 1.2,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        45: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.4,
-            "safe_dips_threshold_144"   : 0.8,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.35,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        46: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "24",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.32,
-            "safe_dips_threshold_144"   : 0.34,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.6,
-            "safe_pump_36h_threshold"   : 1.0,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        47: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : True,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.9,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        48: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.8,
-            "safe_pump_36h_threshold"   : 1.3,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.2
-        },
-        49: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : True,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : None,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.6,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        50: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.56,
-            "safe_pump_36h_threshold"   : 1.0,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        51: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.03,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : 0.3,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : 0.58,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.1,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-        },
-        52: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.25,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.62,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 0.95,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        53: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.16,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.7,
-            "safe_pump_48h_threshold"   : 1.1,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        54: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.24,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.95,
-            "safe_pump_48h_threshold"   : 1.05,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        55: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : 0.7,
-            "safe_pump_48h_threshold"   : 0.7,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        56: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : 0.3,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        57: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.28,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.1,
-            "btc_1h_not_downtrend"      : True,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        58: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.024,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.14,
-            "safe_dips_threshold_144"   : 0.24,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.0,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        59: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.36,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.52,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.0,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "sup3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.75,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        60: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.8,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "sup2", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 0.96,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        62: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "50",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "50",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "42",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "50",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.23,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.6,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        63: {
-            "ema_fast"                  : True,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.13,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.5,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "res3", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.2
-         },
-        64: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : 1.0,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : 1.0
-         },
-        65: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : None,
-            "safe_dips_threshold_2"     : None,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
-            "safe_pump_6h_threshold"    : None,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : None,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : None
-         },
-        66: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : None,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : None
-        },
-        67: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : None,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : None
-        },
-        68: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "12",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.18,
-            "safe_dips_threshold_144"   : 0.26,
-            "safe_pump_6h_threshold"    : 0.5,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : 0.75,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : 1.4,
-            "btc_1h_not_downtrend"      : False,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : None,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : None
-        },
         69: {
             "ema_fast"                  : ema_fast.value,
             "ema_fast_len"              : ema_fast_len.value,
@@ -2400,7 +450,7 @@ class NostalgiaForInfinityXw(IStrategy):
             "sma200_rising"             : sma200_rising.value,
             "sma200_rising_val"         : sma200_rising_val.value,
             "sma200_1h_rising"          : sma200_1h_rising.value,
-            "sma200_1h_rising_val"      : "48",
+            "sma200_1h_rising_val"      : sma200_1h_rising_val.value,
             "safe_dips_threshold_0"     : safe_dips_threshold_0.value,
             "safe_dips_threshold_2"     : safe_dips_threshold_2.value,
             "safe_dips_threshold_12"    : safe_dips_threshold_12.value,
@@ -2411,10 +461,10 @@ class NostalgiaForInfinityXw(IStrategy):
             "safe_pump_36h_threshold"   : safe_pump_36h_threshold.value,
             "safe_pump_48h_threshold"   : safe_pump_48h_threshold.value,
             "btc_1h_not_downtrend"      : btc_uptrend.value,
-            "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_over_pivot_offset"   : None,
-            "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
-            "close_under_pivot_offset"  : None
+            "close_over_pivot_type"     : close_over_pivot_type.value, # pivot, sup1, sup2, sup3, res1, res2, res3
+            "close_over_pivot_offset"   : close_over_pivot_offset.value,
+            "close_under_pivot_type"    : close_under_pivot_type.value, # pivot, sup1, sup2, sup3, res1, res2, res3
+            "close_under_pivot_offset"  : close_under_pivot_offset.value
         }
     }
 
@@ -2640,19 +690,6 @@ class NostalgiaForInfinityXw(IStrategy):
         return int(self.timeframe[:-1])
 
     def sell_signals(self, current_profit: float, max_profit:float, max_loss:float, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade: 'Trade', current_time: 'datetime', buy_tag) -> tuple:
-        
-        
-        IND = 'trend_kst_diff'
-        REAL = self.sell_real.value
-        OPR = self.sell_cat.value
-        DFIND = last_candle[IND]
-        #print(buy_tag)
-        if OPR == ">R" and DFIND > REAL:
-            return True, 'sell_signal_Wieger_1'
-        elif OPR == "=R" and np.isclose(DFIND, REAL):
-            return True, 'sell_signal_Wieger_2'
-        elif OPR == "<R" and DFIND < REAL:
-            return True, 'sell_signal_Wieger_3'
         
         
         # Sell signal 1
@@ -8574,31 +6611,18 @@ class NostalgiaForInfinityXw(IStrategy):
         if sell and (signal_name is not None):
             return True, signal_name
         
-        IND = 'trend_kst_diff'
-        REAL = self.sell_real.value
-        OPR = self.sell_cat.value
-        DFIND = last_candle[IND]
-        # print(DFIND.mean())
-
-        if OPR == ">R" and DFIND > REAL:
-            return True, 'sell_profit_w_12_long_Wieger_1'
-        elif OPR == "=R" and np.isclose(DFIND, REAL):
-            return True, 'sell_profit_w_12_long_Wieger_2'
-        elif OPR == "<R" and DFIND < REAL:
-            return True, 'sell_profit_w_12_long_Wieger_Final'
         
-        #if (last_candle[self.sell_cat.value] > self.sell_val0.value):
-        #        return True, 'sell_profit_w_12_long_Wieger'
-        
-        #if(np.isclose(last_candle[self.sell_cat.value], 0.9455)):
-        #    return True, 'sell_long_yolo'
-
-        return False, None
-
         if (0.0 < current_profit <= 0.02) and (max_profit - current_profit > 0.025) and (last_candle['cmf'] < 0.0):
-            return True, 'sell_long_t_0'
+            if self.sell_long_t_0.value:
+                return True, 'sell_long_t_0'
+            else:
+                return False, 'none'
+            
         elif (0.02 < current_profit <= 0.04) and (max_profit - current_profit > 0.03) and (last_candle['cmf'] < 0.0):
-            return True, 'sell_long_t_1'
+            if self.sell_long_t_1.value:
+                return True, 'sell_long_t_1'
+            else:
+                return False, 'none'
         elif (0.04 < current_profit <= 0.06) and (max_profit - current_profit > 0.035) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_2'
         elif (0.06 < current_profit <= 0.08) and (max_profit - current_profit > 0.04) and (last_candle['cmf'] < 0.0):
@@ -8735,6 +6759,7 @@ class NostalgiaForInfinityXw(IStrategy):
         pairs = self.dp.current_whitelist()
         # Assign tf to each pair so they can be downloaded and cached for strategy.
         informative_pairs = [(pair, self.info_timeframe_1h) for pair in pairs]
+        informative_pairs.extend([(pair, self.info_timeframe_4h) for pair in pairs])
         informative_pairs.extend([(pair, self.info_timeframe_1d) for pair in pairs])
         informative_pairs.extend([(pair, self.info_timeframe_15m) for pair in pairs])
 
@@ -8745,9 +6770,111 @@ class NostalgiaForInfinityXw(IStrategy):
 
         informative_pairs.append((btc_info_pair, self.timeframe))
         informative_pairs.append((btc_info_pair, self.info_timeframe_1d))
-        informative_pairs.append((btc_info_pair, self.info_timeframe_1h))
+        informative_pairs.append((btc_info_pair, self.info_timeframe_4h))
+        informative_pairs.append((btc_info_pair, self.info_timeframe_1h))        
         informative_pairs.append((btc_info_pair, self.info_timeframe_15m))
         return informative_pairs
+
+    def informative_4h_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        tik = time.perf_counter()
+        assert self.dp, "DataProvider is required for multiple timeframes."
+        # Get the informative pair
+        informative_4h = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.info_timeframe_4h)
+        
+        # Heikin Ashi
+        inf_heikinashi = qtpylib.heikinashi(informative_4h)
+        informative_4h['ha_close'] = inf_heikinashi['close']
+        informative_4h['rocr'] = ta.ROCR(informative_4h['ha_close'], timeperiod=168)
+
+        # RSI
+        informative_4h['rsi_14'] = ta.RSI(informative_4h, timeperiod=14)
+        
+        informative_4h['rmi_length_17'] = RMI(dataframe, length=17, mom=4)
+        informative_4h['cci_length_25'] = ta.CCI(dataframe, 25)
+
+        # EMAs
+        informative_4h['ema_12'] = ta.EMA(informative_4h, timeperiod=12)
+        informative_4h['ema_20'] = ta.EMA(informative_4h, timeperiod=20)
+        informative_4h['ema_25'] = ta.EMA(informative_4h, timeperiod=25)
+        informative_4h['ema_35'] = ta.EMA(informative_4h, timeperiod=35)
+        informative_4h['ema_50'] = ta.EMA(informative_4h, timeperiod=50)
+        informative_4h['ema_100'] = ta.EMA(informative_4h, timeperiod=100)
+        informative_4h['ema_200'] = ta.EMA(informative_4h, timeperiod=200)
+
+        # SMA
+        informative_4h['sma_200'] = ta.SMA(informative_4h, timeperiod=200)
+
+        informative_4h['sma_200_dec_20'] = informative_4h['sma_200'] < informative_4h['sma_200'].shift(20)
+        informative_4h['sma_200_dec_24'] = informative_4h['sma_200'] < informative_4h['sma_200'].shift(24)
+
+        # BB
+        bollinger = qtpylib.bollinger_bands(qtpylib.typical_price(informative_4h), window=20, stds=2)
+        informative_4h['bb20_2_low'] = bollinger['lower']
+        informative_4h['bb20_2_mid'] = bollinger['mid']
+        informative_4h['bb20_2_upp'] = bollinger['upper']
+
+        informative_4h['bb20_width'] = ((informative_4h['bb20_2_upp'] - informative_4h['bb20_2_low']) / informative_4h['bb20_2_mid'])
+
+        # CMF
+        informative_4h['cmf'] = chaikin_money_flow(informative_4h, 20)
+
+        # CTI
+        informative_4h['cti'] = pta.cti(informative_4h["close"], length=20)
+
+        # CRSI (3, 2, 100)
+        crsi_closechange = informative_4h['close'] / informative_4h['close'].shift(1)
+        crsi_updown = np.where(crsi_closechange.gt(1), 1.0, np.where(crsi_closechange.lt(1), -1.0, 0.0))
+        informative_4h['crsi'] =  (ta.RSI(informative_4h['close'], timeperiod=3) + ta.RSI(crsi_updown, timeperiod=2) + ta.ROC(informative_4h['close'], 100)) / 3
+
+        # Williams %R
+        informative_4h['r_14'] = williams_r(informative_4h, period=14)
+        informative_4h['r_480'] = williams_r(informative_4h, period=480)
+
+        # EWO
+        informative_4h['ewo'] = ewo(informative_4h, 50, 200)
+
+        # ROC
+        informative_4h['roc_9'] = ta.ROC(informative_4h, timeperiod=9)
+
+        # T3 Average
+        informative_4h['t3_avg'] = t3_average(informative_4h)
+
+        # S/R
+        res_series = informative_4h['high'].rolling(window = 5, center=True).apply(lambda row: self.is_resistance(row), raw=True).shift(2)
+        sup_series = informative_4h['low'].rolling(window = 5, center=True).apply(lambda row: self.is_support(row), raw=True).shift(2)
+        informative_4h['res_level'] = Series(np.where(res_series, np.where(informative_4h['close'] > informative_4h['open'], informative_4h['close'], informative_4h['open']), float('NaN'))).ffill()
+        informative_4h['res_hlevel'] = Series(np.where(res_series, informative_4h['high'], float('NaN'))).ffill()
+        informative_4h['sup_level'] = Series(np.where(sup_series, np.where(informative_4h['close'] < informative_4h['open'], informative_4h['close'], informative_4h['open']), float('NaN'))).ffill()
+
+        # Pump protections
+        informative_4h['hl_pct_change_48'] = self.range_percent_change(informative_4h, 'HL', 48)
+        informative_4h['hl_pct_change_36'] = self.range_percent_change(informative_4h, 'HL', 36)
+        informative_4h['hl_pct_change_24'] = self.range_percent_change(informative_4h, 'HL', 24)
+        informative_4h['hl_pct_change_12'] = self.range_percent_change(informative_4h, 'HL', 12)
+        informative_4h['hl_pct_change_6'] = self.range_percent_change(informative_4h, 'HL', 6)
+        
+        informative_4h['trend_ichimoku_base'] = ta2.trend.ichimoku_base_line(
+            informative_4h['high'],
+            informative_4h['low'],
+            window1=self.ichimoku_window1.value,
+            window2=self.ichimoku_window2.value,
+            visual=False,
+            fillna=False
+        )
+        
+        
+        # Normalisation
+        tib = informative_4h['trend_ichimoku_base']
+        informative_4h['trend_ichimoku_base'] = (
+            tib-tib.min())/(tib.max()-tib.min())
+        
+        
+        
+
+        tok = time.perf_counter()
+        log.debug(f"[{metadata['pair']}] informative_4h_indicators took: {tok - tik:0.4f} seconds.")
+
+        return informative_4h
 
     def informative_1d_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         tik = time.perf_counter()
@@ -8965,29 +7092,14 @@ class NostalgiaForInfinityXw(IStrategy):
             visual=False,
             fillna=False
         )
-        KST = ta2.trend.KSTIndicator(
-            close=dataframe['close'],
-            roc1=self.kst_roc1.value,
-            roc2=self.kst_roc2.value,
-            roc3=self.kst_roc3.value,
-            roc4=self.kst_roc4.value,
-            window1=self.kst_window1.value,
-            window2=self.kst_window2.value,
-            window3=self.kst_window3.value,
-            window4=self.kst_window4.value,
-            nsig=9,
-            fillna=False
-        )
         
-        dataframe['trend_kst_diff'] = KST.kst_diff()
         
         # Normalisation
         tib = dataframe['trend_ichimoku_base']
         dataframe['trend_ichimoku_base'] = (
             tib-tib.min())/(tib.max()-tib.min())
         
-        tkd = dataframe['trend_kst_diff']
-        dataframe['trend_kst_diff'] = (tkd-tkd.min())/(tkd.max()-tkd.min())
+        
         
         # SMA
         dataframe['sma_15'] = ta.SMA(dataframe, timeperiod=15)
@@ -9257,6 +7369,12 @@ class NostalgiaForInfinityXw(IStrategy):
             dataframe = merge_informative_pair(dataframe, informative_1h, self.timeframe, self.info_timeframe_1h, ffill=True)
             drop_columns = [f"{s}_{self.info_timeframe_1h}" for s in ['date']]
             dataframe.drop(columns=dataframe.columns.intersection(drop_columns), inplace=True)
+            
+        if self.info_timeframe_4h != 'none':
+            informative_4h = self.informative_4h_indicators(dataframe, metadata)
+            dataframe = merge_informative_pair(dataframe, informative_4h, self.timeframe, self.info_timeframe_4h, ffill=True)
+            drop_columns = [f"{s}_{self.info_timeframe_4h}" for s in ['date']]
+            dataframe.drop(columns=dataframe.columns.intersection(drop_columns), inplace=True)
 
         if self.info_timeframe_15m != 'none':
             informative_15m = self.informative_15m_indicators(dataframe, metadata)
@@ -9349,857 +7467,9 @@ class NostalgiaForInfinityXw(IStrategy):
                 item_buy_logic.append(reduce(lambda x, y: x & y, item_buy_protection_list))
 
                 # Condition #1 - Semi swing mode. Increase in the last candles & relative local dip.
-                if index == 1:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(((dataframe['close'] - dataframe['open'].rolling(12).min()) / dataframe['open'].rolling(12).min()) > 0.027)
-                    item_buy_logic.append(dataframe['rsi_14'] < 35.0)
-                    item_buy_logic.append(dataframe['r_32'] < -80.0)
-                    item_buy_logic.append(dataframe['mfi'] < 31.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] > 30.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] < 84.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] > -99.0)
-
-                # Condition #2 - Semi swing. Local dip.
-                elif index == 2:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.9))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['rsi_14'] < (dataframe['rsi_14_1h'] - 51.0))
-                    item_buy_logic.append(dataframe['mfi'] < 46.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.8)
-                    item_buy_logic.append(dataframe['r_14'] < -80.0)
-                    item_buy_logic.append(dataframe['r_480'] > -95.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.88)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 1.0))
-
-                # Condition #3 - Semi swing. Local dip.
-                elif index == 3:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.96))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
-                    item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.05))
-                    item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.022))
-                    item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.24))
-                    item_buy_logic.append(dataframe['close'].lt(dataframe['bb40_2_low'].shift()))
-                    item_buy_logic.append(dataframe['close'].le(dataframe['close'].shift()))
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.83)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 15.0)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 1.75))
-                    item_buy_logic.append(dataframe['volume_mean_12'] > (dataframe['volume_mean_24'] * 0.9))
-
-                # Condition #4 - Semi swing. Local dip.
-                elif index == 4:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.93))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.02))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.992))
-                    item_buy_logic.append(dataframe['mfi'] > 18.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.82)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 10.0)
-
-                # Condition #5 - Semi swing. Local dip. Uptrend.
-                elif index == 5:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(12) > dataframe['ema_200_1h'].shift(24))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_75'] * 0.932)
-                    item_buy_logic.append(dataframe['ewo'] > 3.4)
-                    item_buy_logic.append(dataframe['cti'] < -0.93)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-
-                # Condition #6 - Semi swing. Local dip.
-                elif index == 6:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.93))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_15'] * 0.937)
-                    item_buy_logic.append(dataframe['crsi'] < 30.0)
-                    item_buy_logic.append(dataframe['rsi_14'] < dataframe['rsi_14'].shift(1))
-                    item_buy_logic.append(dataframe['rsi_14'] < 28.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.78)
-                    item_buy_logic.append(dataframe['cci'] < -200.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -12.0)
-
-                # Condition #7 - Semi swing. Local dip.
-                elif index == 7:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_50_1h'] > dataframe['ema_100_1h'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_30'] * 0.94)
-                    item_buy_logic.append(dataframe['close'] < dataframe['bb20_2_low'] * 0.995)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'] < -95.0)
-
-                # Condition #8 - Semi swing. Local deeper dip. Uptrend.
-                elif index == 8:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_30'] * 0.927)
-                    item_buy_logic.append(dataframe['ewo'] > 3.2)
-                    item_buy_logic.append(dataframe['rsi_14'] < 32.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-
-                # Condition #9 - Semi swing. Local dip. Downtrend.
-                elif index == 9:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_50_1h'] > dataframe['ema_100_1h'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_30'] * 0.99)
-                    item_buy_logic.append(dataframe['cti'] < -0.92)
-                    item_buy_logic.append(dataframe['ewo'] < -4.8)
-                    item_buy_logic.append(dataframe['cti_1h'] < -0.88)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 18.0)
-
-                # Condition #10 - Semi swing. Local dip.
-                elif index == 10:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.017))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.984))
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.965)
-                    item_buy_logic.append(dataframe['cti'] < -0.87)
-
-                # Condition #11 - Semi swing. Local dip.
-                elif index == 11:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.027))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.938)
-                    item_buy_logic.append(dataframe['rsi_14'] < 25.0)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 5.0))
-
-                # Condition #12 - Semi swing. Local deeper dip. Uptrend.
-                elif index == 12:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.932)
-                    item_buy_logic.append(dataframe['ewo'] > 0.1)
-                    item_buy_logic.append(dataframe['rsi_14'] < 40.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -20.0)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 2.8))
-
-                # Condition #13 - Semi swing. Downtrend. Local dip.
-                elif index == 13:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.999)
-                    item_buy_logic.append(dataframe['ewo'] < -5.4)
-                    item_buy_logic.append(dataframe['cti'] < -0.97)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 12.0)
-
-                # Condition #14 - Semi swing. Strong uptrend. Local dip.
-                elif index == 14:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_100_1h'] > dataframe['ema_100_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(36))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_30'] * 0.98)
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.984))
-                    item_buy_logic.append(dataframe['ewo'] > 7.8)
-                    item_buy_logic.append(dataframe['rsi_14'] < 32.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.7)
-                    item_buy_logic.append(dataframe['cti_1h'] > -0.5)
-
-                # Condition #15 - Semi swing. Uptrend. Local dip.
-                elif index == 15:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.99))
-                    item_buy_logic.append(dataframe['ewo'] > 2.2)
-                    item_buy_logic.append(dataframe['rsi_14'] < 28.5)
-                    item_buy_logic.append(dataframe['cti'] < -0.8)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] < 80.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.4)
-
-                # Condition #16 - Semi swing. Cross above.
-                elif index == 16:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_12_1h'].shift(12) < dataframe['ema_35_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_12_1h'] > dataframe['ema_35_1h'])
-                    item_buy_logic.append(dataframe['cmf_1h'].shift(12) < 0.0)
-                    item_buy_logic.append(dataframe['cmf_1h'] > 0.0)
-                    item_buy_logic.append(dataframe['rsi_14'] < 50.0)
-                    item_buy_logic.append(dataframe['cti'] < 0.5)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] > 67.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.25)
-
-                # Condition #17 - Semi swing. Deep buy.
-                elif index == 17:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['r_480'] < -90.0)
-                    item_buy_logic.append(dataframe['r_14'] < -99.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -93.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] + dataframe['rsi_14'] < 33.0)
-
-                # Condition #18 - Semi swing. Local dip. BTC not negative.
-                elif index == 18:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(12) > dataframe['ema_200_1h'].shift(24))
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.018))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.982))
-
-                # Condition #19 - Semi swing. Uptrend. Local dip.  BTC not downtrend.
-                elif index == 19:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(12) > dataframe['ema_200_1h'].shift(24))
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
-                    item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.045))
-                    item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.02))
-                    item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.28))
-                    item_buy_logic.append(dataframe['close'].lt(dataframe['bb40_2_low'].shift()))
-                    item_buy_logic.append(dataframe['close'].le(dataframe['close'].shift()))
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['cti_1h'] > -0.75)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.25)
-
-                # Condition #20 - Semi swing. Uptrend. Local dip.
-                elif index == 20:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'].shift(1) < (dataframe['sma_15'].shift(1) * 0.942))
-                    item_buy_logic.append(dataframe['close'] > (dataframe['open'].shift(1)))
-                    item_buy_logic.append(dataframe['ewo'] > 4.8)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'].shift(1) < -97.0)
-
-                # Condition #21 - Semi swing. Deep local dip. Mild uptrend.
-                elif index == 21:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.941)
-                    item_buy_logic.append(dataframe['ewo'] > 2.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.84)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-                    item_buy_logic.append(dataframe['r_96'] < -87.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.8)
-
-                # Condition #22 - Swing. Uptrend. Bounce from daily support level
-                elif index == 22:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close_1h'] > dataframe['sup_level_1d'])
-                    item_buy_logic.append(dataframe['close_1h'] < dataframe['sup_level_1d'] * 1.05)
-                    item_buy_logic.append(dataframe['low_1h'] < dataframe['sup_level_1d'] * 0.99)
-                    item_buy_logic.append(dataframe['close_1h'] < dataframe['res_level_1h'])
-                    item_buy_logic.append(dataframe['res_level_1d'] > dataframe['sup_level_1d'])
-                    item_buy_logic.append(dataframe['rsi_14'] < 39.8)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] > 48.0)
-
-                    # Confirm uptrend - Heikin-Ashi
-                    item_buy_logic.append(dataframe['open_sha_1d'] < dataframe['close_sha_1d'])
-                    item_buy_logic.append(dataframe['open_sha_1d'].shift(288) < dataframe['close_sha_1d'].shift(288))
-                    item_buy_logic.append(dataframe['pivot_1d'] > dataframe['pivot_1d'].shift(288) * 0.95)
-
-                # Condition #23 - Semi swing. Downtrend. Local dip.
-                elif index == 23:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo'].shift(1) < -6.4)
-                    item_buy_logic.append(dataframe['cti'].shift(1).rolling(5).max() < -0.9)
-                    item_buy_logic.append(dataframe['r_14'].shift(1) < -97.0)
-                    item_buy_logic.append(dataframe['close'] > (dataframe['open'].shift(1)))
-                    item_buy_logic.append(dataframe['crsi_1h'] > 2.0)
-
-                # Condition #24 - Semi swing. Uptrend. 1h uptrend. Local dip.
-                elif index == 24:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo'] > 5.4)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-                    item_buy_logic.append(dataframe['r_96'] < -90.0)
-                    item_buy_logic.append(dataframe['ewo_1h'] > 2.8)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.92)
-
-                # Condition #25 - Semi swing. CMF 1h cross.
-                elif index == 25:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_12_1h'].shift(12) < dataframe['ema_35_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_12_1h'] > dataframe['ema_35_1h'])
-                    item_buy_logic.append(dataframe['cmf_1h'].shift(12) < 0.0)
-                    item_buy_logic.append(dataframe['cmf_1h'] > 0.0)
-                    item_buy_logic.append(dataframe['rsi_14'] < 33.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.0)
-
-                # Condition #26 - Semi swing. Local deep dip.
-                elif index == 26:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_20_1h'] > dataframe['ema_25_1h'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_15'] * 0.93)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'] < -94.0)
-
-                # Condition #27 - Semi swing. Local deep. Uptrend.
-                elif index == 27:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_75'] * 0.934)
-                    item_buy_logic.append(dataframe['ewo'] > 6.4)
-                    item_buy_logic.append(dataframe['rsi_14'] < 32.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.8)
-                    item_buy_logic.append(dataframe['r_14'] < -96.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -5.0)
-
-                # Condition #28 - Semi swing. Downtrend. Local deep.
-                elif index == 28:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_75'] * 0.96)
-                    item_buy_logic.append(dataframe['ewo'] < -8.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 14.0)
-
-                # Condition #29 - Semi swing. Downtrend. Local deep.
-                elif index == 29:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < (dataframe['ema_16'] * 0.982))
-                    item_buy_logic.append(dataframe['ewo'] < -16.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.75)
-
-                # Condition #30 - Semi swing. Local dip. BTC not downtrend.
-                elif index == 30:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.018))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.98))
-
-                # Condition #31 - Long mode. Local dip.
-                elif index == 31:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
-                    item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.045))
-                    item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.028))
-                    item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.25))
-                    item_buy_logic.append(dataframe['close'].lt(dataframe['bb40_2_low'].shift()))
-                    item_buy_logic.append(dataframe['close'].le(dataframe['close'].shift()))
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 10.0)
-
-                # Condition #32 - Long mode. Local dip.
-                elif index == 32:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.046))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -5.0)
-
-                # Condition #33 - Long mode. Local dip. Uptrend.
-                elif index == 33:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.95))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < (dataframe['ema_16'] * 0.934))
-                    item_buy_logic.append(dataframe['ewo'] > 2.5)
-                    item_buy_logic.append(dataframe['rsi_14'] < 46.0)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-                    item_buy_logic.append(dataframe['ewo_1h'] > 0.1)
-
-                # Condition #34 - Long mode. Local dip.
-                elif index == 34:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_50'])
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.972))
-                    item_buy_logic.append(dataframe['cti'] < -0.8)
-                    item_buy_logic.append(dataframe['rsi_14'] < 18.0)
-
-                # Condition #35 - Long mode. Local deep dip.
-                elif index == 35:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_25'] * 0.85)
-                    item_buy_logic.append(dataframe['close'] > dataframe['open'])
-                    item_buy_logic.append(dataframe['rsi_14'] < 46.0)
-                    item_buy_logic.append(dataframe['mfi'] < 36.0)
-                    item_buy_logic.append(dataframe['cti_1h'] > -0.85)
-
-                # Condition #36 - Long mode. Uptrend. Local dip.
-                elif index == 36:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(36) * 1.035))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.97)
-                    item_buy_logic.append(dataframe['rsi_14'] < 34.0)
-                    item_buy_logic.append(dataframe['r_14'] < -90.0)
-                    item_buy_logic.append(dataframe['r_64'] < -80.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['volume_mean_12'] > (dataframe['volume_mean_24'] * 0.9))
-                    item_buy_logic.append(dataframe['r_480_1h'] < -30.0)
-
-                # Condition #37 - Semi swing. Uptrend. Local dip.
-                elif index == 37:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.01))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_low'] * 0.99))
-                    item_buy_logic.append(dataframe['r_14'] < -94.0)
-                    item_buy_logic.append(dataframe['r_64'] < -75.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -20.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] < 80.0)
-
-                # Condition #38 - Semi swing. Uptrend. Local dip.
-                elif index == 38:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.01))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26'] > dataframe['ema_12'])
-                    item_buy_logic.append((dataframe['ema_26'] - dataframe['ema_12']) > (dataframe['open'] * 0.024))
-                    item_buy_logic.append((dataframe['ema_26'].shift() - dataframe['ema_12'].shift()) > (dataframe['open'] / 100))
-                    item_buy_logic.append(dataframe['r_64'] < -66.0)
-                    item_buy_logic.append(dataframe['r_96'] < -50.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -1.0)
-
-                # Condition #39 - Semi swing. Uptrend. Local dip.
-                elif index == 39:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.0114))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift().gt(0))
-                    item_buy_logic.append(dataframe['bb40_2_delta'].gt(dataframe['close'] * 0.05))
-                    item_buy_logic.append(dataframe['closedelta'].gt(dataframe['close'] * 0.01))
-                    item_buy_logic.append(dataframe['tail'].lt(dataframe['bb40_2_delta'] * 0.5))
-                    item_buy_logic.append(dataframe['close'].lt(dataframe['bb40_2_low'].shift()))
-                    item_buy_logic.append(dataframe['close'].le(dataframe['close'].shift()))
-                    item_buy_logic.append(dataframe['r_480_1h'] < -5.0)
-                    item_buy_logic.append(dataframe['volume_mean_12'] > (dataframe['volume_mean_24'] * 1.0))
-
-                # Condition #40 - Semi swing. Uptrend. Local dip.
-                elif index == 40:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200'] > (dataframe['ema_200'].shift(12) * 1.01))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_20'] * 0.97)
-                    item_buy_logic.append(dataframe['rsi_14'] < 32.0)
-                    item_buy_logic.append(dataframe['r_14'] < -90.0)
-                    item_buy_logic.append(dataframe['r_64'] < -80.0)
-                    item_buy_logic.append(dataframe['rsi_14_1h'] < 80.0)
-
-                # Condition #41 - 15m. Semi swing. Local dip. BTC not downtrend.
-                elif index == 41:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_12_15m'] > dataframe['ema_200_1h'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26_15m'] > dataframe['ema_12_15m'])
-                    item_buy_logic.append((dataframe['ema_26_15m'] - dataframe['ema_12_15m']) > (dataframe['open_15m'] * 0.03))
-                    item_buy_logic.append((dataframe['ema_26_15m'].shift(3) - dataframe['ema_12_15m'].shift(3)) > (dataframe['open_15m'] / 100))
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['bb20_2_low_15m'] * 0.998))
-                    item_buy_logic.append(dataframe['cti'] < -0.75)
-
-                # Condition #42 - 15m. Semi swing. Local dip. 15m uptrend.
-                elif index == 42:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.92))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo_15m'] > 7.8)
-                    item_buy_logic.append(dataframe['rsi_14_15m'] < 36.0)
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -90.0)
-                    item_buy_logic.append(dataframe['r_14'] < -96.0)
-                    item_buy_logic.append(dataframe['mfi'] > 24.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -5.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 14.0)
-
-                # Condition #43 - 15m. Semi swing. Local dip. 1h uptrend.
-                elif index == 43:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb40_2_low_15m'].shift().gt(0))
-                    item_buy_logic.append(dataframe['bb40_2_delta_15m'].gt(dataframe['close_15m'] * 0.045))
-                    item_buy_logic.append(dataframe['closedelta_15m'].gt(dataframe['close_15m'] * 0.034))
-                    item_buy_logic.append(dataframe['tail_15m'].lt(dataframe['bb40_2_delta_15m'] * 0.18))
-                    item_buy_logic.append(dataframe['close_15m'].lt(dataframe['bb40_2_low_15m'].shift()))
-                    item_buy_logic.append(dataframe['close_15m'].le(dataframe['close_15m'].shift()))
-                    item_buy_logic.append(dataframe['rsi_14_15m'] < 30.0)
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.85)
-                    item_buy_logic.append(dataframe['r_64_15m'] < -70.0)
-
-                # Condition #44 - 15m. Semi swing. Local deeper dip. 15m uptrend.
-                elif index == 44:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_200_15m'] > (dataframe['ema_200_15m'].shift(36) * 1.01))
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.95))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close_15m'] < dataframe['ema_26_15m'] * 0.99)
-                    item_buy_logic.append(dataframe['rsi_14_15m'] < 26.0)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -90.0)
-                    item_buy_logic.append(dataframe['volume_mean_12'] > (dataframe['volume_mean_24'] * 1.2))
-
-                # Condition #45 - 15m. Semi swing. Local deeper dip. 15m uptrend.
-                elif index == 45:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_50_15m'] > dataframe['ema_200_1h'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close_15m'] < dataframe['ema_20_15m'] * 0.934)
-                    item_buy_logic.append(dataframe['ewo_15m'] > 3.6)
-                    item_buy_logic.append(dataframe['cci_15m'] < -190.0)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -97.0)
-                    item_buy_logic.append((dataframe['rsi_14_1h'] + dataframe['rsi_14_15m']) < 70.0)
-
-                # Condition #46 - 15m. Semi swing. 1h uptrend.
-                elif index == 46:
-                    # Non-Standard protections (add below)
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(12) > dataframe['ema_200_1h'].shift(24))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26_15m'] > dataframe['ema_12_15m'])
-                    item_buy_logic.append((dataframe['ema_26_15m'] - dataframe['ema_12_15m']) > (dataframe['open_15m'] * 0.027))
-                    item_buy_logic.append((dataframe['ema_26_15m'].shift(3) - dataframe['ema_12_15m'].shift(3)) > (dataframe['open_15m'] / 100))
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['bb20_2_low_15m'] * 0.982))
-                    item_buy_logic.append(dataframe['r_14'] < -75.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 14.0)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 5.0))
-
-                # Condition #47 - 15m. Semi swing. Local dip. 1h minor dip.
-                elif index == 47:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['rsi_14_15m'] < dataframe['rsi_14_15m'].shift(3))
-                    item_buy_logic.append(dataframe['ema_20_1h'] > dataframe['ema_25_1h'])
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['sma_15_15m'] * 0.95))
-                    item_buy_logic.append(
-                        ((dataframe['open_15m'] < dataframe['ema_20_1h']) & (dataframe['low_15m'] < dataframe['ema_20_1h'])) |
-                        ((dataframe['open_15m'] > dataframe['ema_20_1h']) & (dataframe['low_15m'] > dataframe['ema_20_1h'])))
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -90.0)
-                    item_buy_logic.append(dataframe['r_14'] < -97.0)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.1)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 8.0)
-
-                # Condition #48 - 15m. Semi swing. Local deep. 15m uptrend.
-                elif index == 48:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close_15m'].shift(3) < (dataframe['sma_15_15m'].shift(3) * 0.95))
-                    item_buy_logic.append(dataframe['close_15m'] > (dataframe['open_15m'].shift(3)))
-                    item_buy_logic.append(dataframe['ewo_15m'] > 5.0)
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.75)
-                    item_buy_logic.append(dataframe['r_14_15m'].shift(3) < -94.0)
-                    item_buy_logic.append(dataframe['cti'] < -0.5)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.1)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 18.0)
-
-                # Condition #49 - 15m. Semi swing. Local deeper dip.
-                elif index == 49:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26_15m'] > dataframe['ema_12_15m'])
-                    item_buy_logic.append((dataframe['ema_26_15m'] - dataframe['ema_12_15m']) > (dataframe['open_15m'] * 0.032))
-                    item_buy_logic.append((dataframe['ema_26_15m'].shift(3) - dataframe['ema_12_15m'].shift(3)) > (dataframe['open_15m'] / 100))
-                    item_buy_logic.append(dataframe['close_15m'] < dataframe['ema_20_15m'] * 0.928)
-                    item_buy_logic.append(dataframe['rsi_14_15m'] < 28.0)
-                    item_buy_logic.append(dataframe['crsi_15m'] > 18.0)
-
-                # Condition #50 - 15m. Semi swing. Deep local dip. Mild 15m uptrend.
-                elif index == 50:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close_15m'] < dataframe['ema_20_15m'] * 0.932)
-                    item_buy_logic.append(dataframe['ewo_15m'] > 1.8)
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -96.0)
-                    item_buy_logic.append(dataframe['r_96_15m'] < -75.0)
-                    item_buy_logic.append(dataframe['rsi_14'] < 32.0)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -97.0)
-
-                # Condition #51 - 15m. Semi swing. Downtrend. Dip.
-                elif index == 51:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['ema_16_15m'] * 0.942))
-                    item_buy_logic.append(dataframe['ewo_15m'] < -1.0)
-                    item_buy_logic.append(dataframe['rsi_14_15m'] > 29.0)
-                    item_buy_logic.append(dataframe['cti_15m'] < -0.84)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -94.0)
-                    item_buy_logic.append(dataframe['rsi_14'] > 30.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 1.0)
-
-                # Condition #52 - 15m Semi swing. Local dip. BTC not downtrend.
-                elif index == 52:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26_15m'] > dataframe['ema_12_15m'])
-                    item_buy_logic.append((dataframe['ema_26_15m'] - dataframe['ema_12_15m']) > (dataframe['open_15m'] * 0.03))
-                    item_buy_logic.append((dataframe['ema_26_15m'].shift(3) - dataframe['ema_12_15m'].shift(3)) > (dataframe['open_15m'] / 100))
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['bb20_2_low_15m'] * 0.998))
-                    item_buy_logic.append(dataframe['crsi_1h'] > 10.0)
-
-                # Condition #53 - 15m. Semi swing. BTC not negative. Local dip.
-                elif index == 53:
-                    # Non-Standard protections (add below)
-                    item_buy_logic.append(dataframe['ema_200_1h'] > dataframe['ema_200_1h'].shift(12))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(12) > dataframe['ema_200_1h'].shift(24))
-                    item_buy_logic.append(dataframe['ema_200_1h'].shift(24) > dataframe['ema_200_1h'].shift(36))
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.94))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_26_15m'] > dataframe['ema_12_15m'])
-                    item_buy_logic.append((dataframe['ema_26_15m'] - dataframe['ema_12_15m']) > (dataframe['open_15m'] * 0.02))
-                    item_buy_logic.append((dataframe['ema_26_15m'].shift(3) - dataframe['ema_12_15m'].shift(3)) > (dataframe['open_15m'] / 100))
-                    item_buy_logic.append(dataframe['close_15m'] < (dataframe['bb20_2_low_15m'] * 0.99))
-                    item_buy_logic.append(dataframe['r_14'] < -75.0)
-                    item_buy_logic.append(dataframe['cti_1h'] > -0.7)
-
-                # Condition #54 - 15m Semi swing. Uptrend. Local dip.
-                elif index == 54:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['ema_12_15m'] > dataframe['ema_200_15m'])
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo_15m'] > 7.4)
-                    item_buy_logic.append(dataframe['r_14_15m'] < -96.0)
-                    item_buy_logic.append(dataframe['r_96_15m'] < -94.0)
-                    item_buy_logic.append(dataframe['r_14'] < -96.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 12.0)
-
-                # Condition #55 - 15m. Semi swing. Uptrend. Local dip.
-                elif index == 55:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo_15m'] > 7.0)
-                    item_buy_logic.append(dataframe['close_15m'] > (dataframe['close_15m'].shift(3)))
-                    item_buy_logic.append(dataframe['close_15m'].shift(3) < (dataframe['bb20_2_low_15m'].shift(3) * 0.992))
-                    item_buy_logic.append(dataframe['r_14_15m'].shift(3) < -95.0)
-                    item_buy_logic.append(dataframe['r_96_15m'].shift(3) < -86.0)
-                    item_buy_logic.append(dataframe['close'] < dataframe['open'])
-
-                # Condition #56 - 15m. Semi swing. Downtrend. Local dip.
-                elif index == 56:
-                    # Non-Standard protections (add below)
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo_15m'].shift(3) < -14.8)
-                    item_buy_logic.append(dataframe['cti_15m'].shift(3).rolling(15).max() < -0.9)
-                    item_buy_logic.append(dataframe['r_14_15m'].shift(3) < -90.0)
-                    item_buy_logic.append(dataframe['r_14'] < -50.0)
-
-                # Condition #57 - 15m. Semi swing. Strong uptrend. Local dip. BTC not downtrend.
-                elif index == 57:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.92))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo_15m'].shift(3) > 6.5)
-                    item_buy_logic.append(dataframe['close_15m'].shift(3) < (dataframe['sma_30_15m'].shift(3) * 0.988))
-                    item_buy_logic.append(dataframe['close_15m'].shift(3) < (dataframe['bb20_2_low_15m'].shift(3) * 0.996))
-                    item_buy_logic.append(dataframe['rsi_14_15m'].shift(3) < 31.2)
-                    item_buy_logic.append(dataframe['r_14_15m'].shift(3) < -94.0)
-                    item_buy_logic.append(dataframe['r_96_15m'].shift(3) < -80.0)
-                    item_buy_logic.append(dataframe['close'] < dataframe['open'])
-
-                # Condition #58 - Semi swing. Local dip.
-                elif index == 58:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['rmi_17'] < 49.0)
-                    item_buy_logic.append(dataframe['cci_25'] < -120.0)
-                    item_buy_logic.append(dataframe['srsi_fk'] < 32.0)
-                    item_buy_logic.append(dataframe['bb20_delta'] > 0.026)
-                    item_buy_logic.append(dataframe['bb20_width'] > 0.095)
-                    item_buy_logic.append(dataframe['close_delta'] > dataframe['close'] * 10.0 / 1000.0 )
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_3_low'] * 0.995))
-
-                # Condition #59 - Semi swing. Local dip.
-                elif index == 59:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ema_100'] < (dataframe['ema_200'] * 1.054))
-                    item_buy_logic.append(dataframe['bb20_width'] > 0.34)
-                    item_buy_logic.append(dataframe['close'] < (dataframe['bb20_2_mid'] * 1.014))
-                    item_buy_logic.append(dataframe['volume_mean_12'] > (dataframe['volume_mean_24'] * 1.78))
-                    item_buy_logic.append(dataframe['cti'] < -0.115)
-                    item_buy_logic.append(dataframe['r_14'] < -45.0)
-
-                # Condition #60 - Semi swing. Local dip.
-                elif index == 60:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['roc_9_1h'] < 86.0)
-                    item_buy_logic.append(dataframe['bb20_width_1h'] < 0.954)
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.75))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['rsi_4'] < 44.0)
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_8'] * 0.935)
-                    item_buy_logic.append(dataframe['ewo'] > -5.0)
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_16'] * 0.968)
-                    item_buy_logic.append(dataframe['rsi_14'] < 22.0)
-
-                # Condition #61 - Semi swing. Local dip. Stochastic fast cross.
-                elif index == 61:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['open'] < dataframe['ema_8'] * 1.147)
-                    item_buy_logic.append(qtpylib.crossed_above(dataframe['fastk'], dataframe['fastd']))
-                    item_buy_logic.append(dataframe['fastk'] < 39.0)
-                    item_buy_logic.append(dataframe['fastd'] < 28.0)
-                    item_buy_logic.append(dataframe['adx'] > 13.0)
-                    item_buy_logic.append(dataframe['ewo'] > 3.4)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['cti_1h'] < 0.0)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -25.0)
-
-                # Condition #62 - Semi swing. Local dip. Downtrend.
-                elif index == 62:
-                    # Non-Standard protections
-
-                    # Logic
-                    item_buy_logic.append(dataframe['ewo'] < -8.2)
-
-                    item_buy_logic.append(dataframe['bb20_2_mid_1h'] >= dataframe['t3_avg_1h'])
-                    item_buy_logic.append(dataframe['t3_avg'] <= dataframe['ema_8'] * 1.121)
-                    item_buy_logic.append(dataframe['cti'] < -0.9)
-                    item_buy_logic.append(dataframe['r_14'] < -78.0)
-
-                # Condition #63 - Semi swing. Local dip. ClucHA.
-                elif index == 63:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.9))
-                    item_buy_logic.append(dataframe['close'] > (dataframe['ema_200_1h'] * 0.7))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb40_2_delta'] > dataframe['ha_close'] * 0.054)
-                    item_buy_logic.append(dataframe['ha_closedelta'] > dataframe['ha_close'] * 0.017)
-                    item_buy_logic.append(dataframe['ha_tail'] < dataframe['bb40_2_delta'] * 1.14)
-                    item_buy_logic.append(dataframe['ha_close'] < dataframe['bb40_2_low'].shift())
-                    item_buy_logic.append(dataframe['ha_close'] < dataframe['ha_close'].shift())
-                    item_buy_logic.append(dataframe['roc_9_1h'] > 0.526)
-                    item_buy_logic.append(dataframe['r_480_1h'] < -12.0)
-                    item_buy_logic.append(dataframe['volume'] < (dataframe['volume_mean_4'] * 1.25))
-
-                # Condition #64 - Semi swing. Squeeze momentum.
-                elif index == 64:
-                    # Non-Standard protections
-                    item_buy_logic.append(dataframe['close'] > (dataframe['sup_level_1h'] * 0.93))
-
-                    # Logic
-                    item_buy_logic.append(dataframe['bb20_2_low'] < dataframe['kc_lowerband_28_1'])
-                    item_buy_logic.append(dataframe['bb20_2_upp'] > dataframe['kc_upperband_28_1'])
-                    item_buy_logic.append(dataframe['linreg_val_20'].shift(2) > dataframe['linreg_val_20'].shift(1))
-                    item_buy_logic.append(dataframe['linreg_val_20'].shift(1) < dataframe['linreg_val_20'])
-                    item_buy_logic.append(dataframe['linreg_val_20'] < 0.0)
-                    item_buy_logic.append(dataframe['close'] < dataframe['ema_13'] * 0.981)
-                    item_buy_logic.append(dataframe['ewo'] < -4.0)
-                    item_buy_logic.append(dataframe['r_14'] < -46.0)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 20.0)
-                
-                elif index == 65:
-                    
-                    item_buy_logic.append(dataframe['rocr_1h'] > 0.04401)
-                    item_buy_logic.append(dataframe['bb40_2_low'].shift() > 0)
-                    item_buy_logic.append(dataframe['bb_delta_cluc'] > dataframe['ha_close'] * 0.02206)
-                    item_buy_logic.append(dataframe['ha_closedelta'] > dataframe['ha_close'] * 0.04401)
-                    item_buy_logic.append(dataframe['tail'] < dataframe['bb_delta_cluc'] * 1.02515)
-                    item_buy_logic.append(dataframe['ha_close'] < dataframe['bb40_2_low'].shift())
-                    item_buy_logic.append(dataframe['ha_close'] < dataframe['ha_close'].shift())
-                
-                elif index == 66:
-                    item_buy_logic.append(dataframe['rmi_length_17'] < 49)
-                    item_buy_logic.append(dataframe['cci_length_25'] <= -116)
-                    item_buy_logic.append(dataframe['srsi_fk'] < 32)
-                    item_buy_logic.append(dataframe['bb20_delta'] > 0.025)
-                    item_buy_logic.append(dataframe['bb20_width'] > 0.095)
-                    item_buy_logic.append(dataframe['closedelta'] > dataframe['close'] * 17.922 / 1000 )
-                    item_buy_logic.append(dataframe['close'] < dataframe['bb20_3_low'] * 0.999)
-                
-                elif index == 67: # Improvement on signal 62
-                    item_buy_logic.append(dataframe['ewo'] < -9.442)
-                    item_buy_logic.append(dataframe['bb20_2_mid_1h'] >= dataframe['t3_avg_1h'])
-                    item_buy_logic.append(dataframe['t3_avg'] <= dataframe['ema_8'] * 1.121)
-                    item_buy_logic.append(dataframe['cti'] < -0.374)
-                    item_buy_logic.append(dataframe['r_14'] < -51.971)
-                
-                elif index == 68:
-                    item_buy_logic.append(dataframe['pm'] > dataframe['pmax_thresh'])
-                    item_buy_logic.append(dataframe['close'] < dataframe['sma_75'] * 0.98)
-                    item_buy_logic.append(dataframe['ewo'] < -4.4)
-                    item_buy_logic.append(dataframe['cti'] < -0.95)
-                    item_buy_logic.append(dataframe['r_14'] < -97)
-                    item_buy_logic.append(dataframe['crsi_1h'] > 0.5)
-                
-                elif index == 69:
-                    
-                    IND = 'trend_ichimoku_base'
+                if index == 69:
+                 
+                    IND = 'trend_ichimoku_base_4h'
                     REAL = self.buy_real.value
                     OPR = self.buy_cat.value
                     DFIND = dataframe[IND]
