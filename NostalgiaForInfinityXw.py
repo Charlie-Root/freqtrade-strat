@@ -2157,22 +2157,22 @@ class NostalgiaForInfinityXw(IStrategy):
             "close_under_pivot_offset"  : 1.0
          },
         66: {
-            "ema_fast"                  : False,
-            "ema_fast_len"              : "26",
-            "ema_slow"                  : False,
-            "ema_slow_len"              : "12",
-            "close_above_ema_fast"      : False,
-            "close_above_ema_fast_len"  : "200",
-            "close_above_ema_slow"      : False,
-            "close_above_ema_slow_len"  : "200",
-            "sma200_rising"             : False,
-            "sma200_rising_val"         : "24",
-            "sma200_1h_rising"          : False,
-            "sma200_1h_rising_val"      : "48",
-            "safe_dips_threshold_0"     : None,
-            "safe_dips_threshold_2"     : None,
-            "safe_dips_threshold_12"    : None,
-            "safe_dips_threshold_144"   : None,
+            "ema_fast"                  : ema_fast.value,
+            "ema_fast_len"              : ema_fast_len.value,
+            "ema_slow"                  : ema_slow.value,
+            "ema_slow_len"              : ema_slow_len.value,
+            "close_above_ema_fast"      : close_above_ema_fast.value,
+            "close_above_ema_fast_len"  : close_above_ema_fast_len.value,
+            "close_above_ema_slow"      : close_above_ema_slow.value,
+            "close_above_ema_slow_len"  : close_above_ema_slow_len.value,
+            "sma200_rising"             : sma200_rising.value,
+            "sma200_rising_val"         : sma200_rising_val.value,
+            "sma200_1h_rising"          : sma200_1h_rising.value,
+            "sma200_1h_rising_val"      : sma200_1h_rising_val.value,
+            "safe_dips_threshold_0"     : 0.032,
+            "safe_dips_threshold_2"     : 0.09,
+            "safe_dips_threshold_12"    : 0.24,
+            "safe_dips_threshold_144"   : 0.36,
             "safe_pump_6h_threshold"    : None,
             "safe_pump_12h_threshold"   : None,
             "safe_pump_24h_threshold"   : None,
@@ -8507,41 +8507,44 @@ class NostalgiaForInfinityXw(IStrategy):
         sell, signal_name = self.sell_stoploss(current_profit, max_profit, max_loss, last_candle, previous_candle_1, trade, current_time)
         if sell and (signal_name is not None):
             return True, signal_name
+        
+        if(last_candle["sell_signal_1h"]):
+            return True, 'test_signal'
 
-        if (0.0 < current_profit <= 0.02) and (max_profit - current_profit > 0.025) and (last_candle['cmf'] < 0.0):
+        if (0.0 < current_profit <= 0.02) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.025) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_0'
-        elif (0.02 < current_profit <= 0.04) and (max_profit - current_profit > 0.03) and (last_candle['cmf'] < 0.0):
+        elif (0.02 < current_profit <= 0.04) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.03) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_1'
-        elif (0.04 < current_profit <= 0.06) and (max_profit - current_profit > 0.035) and (last_candle['cmf'] < 0.0):
+        elif (0.04 < current_profit <= 0.06) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.035) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_2'
-        elif (0.06 < current_profit <= 0.08) and (max_profit - current_profit > 0.04) and (last_candle['cmf'] < 0.0):
+        elif (0.06 < current_profit <= 0.08) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.04) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_3'
-        elif (0.08 < current_profit <= 0.1) and (max_profit - current_profit > 0.045) and (last_candle['cmf'] < 0.0):
+        elif (0.08 < current_profit <= 0.1) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.045) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_4'
-        elif (0.1 < current_profit <= 0.12) and (max_profit - current_profit > 0.05) and (last_candle['cmf'] < 0.0):
+        elif (0.1 < current_profit <= 0.12) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.05) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_5'
-        elif (0.12 < current_profit <= 0.14) and (max_profit - current_profit > 0.055) and (last_candle['cmf'] < 0.0):
+        elif (0.12 < current_profit <= 0.14) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.055) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_6'
-        elif (0.14 < current_profit <= 0.16) and (max_profit - current_profit > 0.06) and (last_candle['cmf'] < 0.0):
+        elif (0.14 < current_profit <= 0.16) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.06) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_7'
-        elif (0.16 < current_profit <= 0.18) and (max_profit - current_profit > 0.065) and (last_candle['cmf'] < 0.0):
+        elif (0.16 < current_profit <= 0.18) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.065) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_8'
-        elif (0.18 < current_profit <= 0.2) and (max_profit - current_profit > 0.07) and (last_candle['cmf'] < 0.0):
+        elif (0.18 < current_profit <= 0.2) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.07) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_8'
-        elif (0.2 < current_profit <= 0.3) and (max_profit - current_profit > 0.075) and (last_candle['cmf'] < 0.0):
+        elif (0.2 < current_profit <= 0.3) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.075) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_9'
-        elif (0.3 < current_profit <= 0.4) and (max_profit - current_profit > 0.08) and (last_candle['cmf'] < 0.0):
+        elif (0.3 < current_profit <= 0.4) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.08) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_10'
-        elif (0.4 < current_profit <= 0.5) and (max_profit - current_profit > 0.085) and (last_candle['cmf'] < 0.0):
+        elif (0.4 < current_profit <= 0.5) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.085) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_11'
-        elif (0.5 < current_profit <= 1.0) and (max_profit - current_profit > 0.09) and (last_candle['cmf'] < 0.0):
+        elif (0.5 < current_profit <= 1.0) and last_candle["sell_signal_1h"] and (max_profit - current_profit > 0.09) and (last_candle['cmf'] < 0.0):
             return True, 'sell_long_t_12'
 
         return False, None
 
     def sell_long_signals(self, current_profit: float, max_profit:float, max_loss:float, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade: 'Trade', current_time: 'datetime', buy_tag) -> tuple:
         # Sell signal 1
-        if (last_candle['rsi_14'] > 78.0) and (last_candle['close'] > last_candle['bb20_2_upp']) and (previous_candle_1['close'] > previous_candle_1['bb20_2_upp']) and (previous_candle_2['close'] > previous_candle_2['bb20_2_upp']) and (previous_candle_3['close'] > previous_candle_3['bb20_2_upp']) and (previous_candle_4['close'] > previous_candle_4['bb20_2_upp']):
+        if (last_candle['rsi_14'] > 78.0) and last_candle["sell_signal_1h"] and (last_candle['close'] > last_candle['bb20_2_upp']) and (previous_candle_1['close'] > previous_candle_1['bb20_2_upp']) and (previous_candle_2['close'] > previous_candle_2['bb20_2_upp']) and (previous_candle_3['close'] > previous_candle_3['bb20_2_upp']) and (previous_candle_4['close'] > previous_candle_4['bb20_2_upp']):
             if (last_candle['close'] > last_candle['ema_200']):
                 if (current_profit > 0.01):
                     return True, 'sell_long_1_1_1'
@@ -8550,7 +8553,7 @@ class NostalgiaForInfinityXw(IStrategy):
                     return True, 'sell_long_1_2_1'
 
         # Sell signal 2
-        elif (last_candle['rsi_14'] > 79.0) and (last_candle['close'] > last_candle['bb20_2_upp']) and (previous_candle_1['close'] > previous_candle_1['bb20_2_upp']) and (previous_candle_2['close'] > previous_candle_2['bb20_2_upp']):
+        elif (last_candle['rsi_14'] > 79.0) and last_candle["sell_signal_1h"] and (last_candle['close'] > last_candle['bb20_2_upp']) and (previous_candle_1['close'] > previous_candle_1['bb20_2_upp']) and (previous_candle_2['close'] > previous_candle_2['bb20_2_upp']):
             if (last_candle['close'] > last_candle['ema_200']):
                 if (current_profit > 0.01):
                     return True, 'sell_long_2_1_1'
@@ -8559,7 +8562,7 @@ class NostalgiaForInfinityXw(IStrategy):
                     return True, 'sell_long_2_2_1'
 
         # Sell signal 3
-        elif (last_candle['rsi_14'] > 81.0):
+        elif (last_candle['rsi_14'] > 81.0) and last_candle["sell_signal_1h"]:
             if (last_candle['close'] > last_candle['ema_200']):
                 if (current_profit > 0.01):
                     return True, 'sell_long_3_1_1'
@@ -8568,7 +8571,7 @@ class NostalgiaForInfinityXw(IStrategy):
                     return True, 'sell_long_3_2_1'
 
         # Sell signal 4
-        elif (last_candle['rsi_14'] > 77.0) and (last_candle['rsi_14_1h'] > 77.0):
+        elif (last_candle['rsi_14'] > 77.0) and last_candle["sell_signal_1h"] and (last_candle['rsi_14_1h'] > 77.0):
             if (last_candle['close'] > last_candle['ema_200']):
                 if (current_profit > 0.01):
                     return True, 'sell_long_4_1_1'
@@ -8577,12 +8580,12 @@ class NostalgiaForInfinityXw(IStrategy):
                     return True, 'sell_long_4_2_1'
 
         # Sell signal 6
-        elif (last_candle['close'] < last_candle['ema_200']) and (last_candle['close'] > last_candle['ema_50']) and (last_candle['rsi_14'] > 78.5):
+        elif (last_candle['close'] < last_candle['ema_200']) and last_candle["sell_signal_1h"] and (last_candle['close'] > last_candle['ema_50']) and (last_candle['rsi_14'] > 78.5):
             if (current_profit > 0.01):
                 return True, 'sell_long_6_1'
 
         # Sell signal 7
-        elif (last_candle['rsi_14_1h'] > 79.0) and (last_candle['crossed_below_ema_12_26']):
+        elif (last_candle['rsi_14_1h'] > 79.0) and last_candle["sell_signal_1h"] and (last_candle['crossed_below_ema_12_26']):
             if (last_candle['close'] > last_candle['ema_200']):
                 if (current_profit > 0.01):
                     return True, 'sell_long_7_1_1'
@@ -8629,7 +8632,7 @@ class NostalgiaForInfinityXw(IStrategy):
                     max_loss = ((initial_buy.average - trade.min_rate) / trade.min_rate)
 
         # Long mode
-        if all(c in ['31', '32', '33', '34', '35', '36'] for c in buy_tags):
+        if all(c in ['31', '32', '33', '34', '35', '36', '66'] for c in buy_tags):
             sell, signal_name = self.sell_long_mode(current_profit, max_profit, max_loss, last_candle, previous_candle_1, previous_candle_2, previous_candle_3, previous_candle_4, previous_candle_5, trade, current_time, buy_tag)
             if sell and (signal_name is not None):
                 return f"{signal_name} ( {buy_tag})"
