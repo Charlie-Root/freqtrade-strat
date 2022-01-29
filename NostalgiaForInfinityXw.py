@@ -323,7 +323,7 @@ class NostalgiaForInfinityXw(IStrategy):
         10, 300, default=buy_params["sma200_1h_rising_val"], space='buy', optimize=True)
     
     btc_1h_not_downtrend = CategoricalParameter(
-        [True, False], default=buy_params["btc_1h_not_downtrend"], space='buy', optimize=True)
+        [True, False], default=buy_params["btc_1h_not_downtrend"], space='buy', optimize=False)
     
     stoploss_1 = DecimalParameter(
         -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
