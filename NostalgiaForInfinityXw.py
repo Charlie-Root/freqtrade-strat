@@ -67,8 +67,14 @@ log = logging.getLogger(__name__)
 #|  NostalgiaForInfinityX |     40 |          -0.29 |         -11.63 |          -228.453 |          -9.14 |        8:48:00 |    35     0     5  87.5 | 343.120 USDT  13.12% |
 #| NostalgiaForInfinityXw |    103 |          11.00 |        1133.14 |          1630.812 |          65.23 |       14:24:00 |    99     0     4  96.1 | 516.903 USDT  12.50% |
 
-
-
+try:
+    from scipy.signal import argrelextrema
+except ImportError:
+    log.error(
+        "IMPORTANT - please install the scipy python module which is needed for this strategy. "
+        "If you're running Docker, add RUN pip install scipy to your Dockerfile, otherwise run: "
+        "pip install scipy"
+    )
 try:
     import pandas_ta as pta
 except ImportError:
@@ -25605,8 +25611,25 @@ class NostalgiaForInfinityXw(IStrategy):
         if sell and (signal_name is not None):
             return True, signal_name
 
+        if hasattr(trade, "buy_tag") and trade.buy_tag is not None:
+            buy_tag = trade.buy_tag
+            buy_tags = buy_tag.split()
+
+            if all(c in ["66"] for c in buy_tags):
+                
+                if (0.0 < current_profit <= 0.02) and (
+                    current_time - timedelta(minutes=300)
+                    > trade.open_date_utc
+                ):
+                    return True, "long_wieger_low_1"
+                elif (0.02 < current_profit <= 0.05) and (
+                    current_time - timedelta(minutes=600)
+                    > trade.open_date_utc
+                ):
+                    return True, "long_wieger_low_2"
+
         if last_candle["sell_signal"]:
-            return True, f"sell_long_w"
+            return True, f"when_lambo"
 
         if (
             (0.0 < current_profit <= 0.02)
@@ -26381,6 +26404,8 @@ class NostalgiaForInfinityXw(IStrategy):
         min_peaks = argrelextrema(dataframe['close'].values, np.less, order=lookback_size)
         max_peaks = argrelextrema(dataframe['close'].values, np.greater, order=lookback_size)
         
+        lows = min_peaks[0]
+        highs = max_peaks[0]
         #
         for mp in min_peaks[0]:
             dataframe.at[mp, 'buy_signal'] = True
