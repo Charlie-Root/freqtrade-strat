@@ -195,94 +195,94 @@ class NostalgiaForInfinityXw(IStrategy):
     buy_params = {
         #############
         # Enable/Disable conditions
-        "buy_condition_1_enable": True,
-        "buy_condition_2_enable": True,
-        "buy_condition_3_enable": True,
-        "buy_condition_4_enable": True,
-        "buy_condition_5_enable": True,
-        "buy_condition_6_enable": True,
-        "buy_condition_7_enable": True,
-        "buy_condition_8_enable": True,
-        "buy_condition_9_enable": True,
-        "buy_condition_10_enable": True,
-        "buy_condition_11_enable": True,
-        "buy_condition_12_enable": True,
-        "buy_condition_13_enable": True,
-        "buy_condition_14_enable": True,
-        "buy_condition_15_enable": True,
-        "buy_condition_16_enable": True,
-        "buy_condition_17_enable": True,
-        "buy_condition_18_enable": True,
-        "buy_condition_19_enable": True,
-        "buy_condition_20_enable": True,
-        "buy_condition_21_enable": True,
-        "buy_condition_22_enable": True,
-        "buy_condition_23_enable": True,
-        "buy_condition_24_enable": True,
-        "buy_condition_25_enable": True,
-        "buy_condition_26_enable": True,
-        "buy_condition_27_enable": True,
-        "buy_condition_28_enable": True,
-        "buy_condition_29_enable": True,
-        "buy_condition_30_enable": True,
-        "buy_condition_31_enable": True,
-        "buy_condition_32_enable": True,
-        "buy_condition_33_enable": True,
-        "buy_condition_34_enable": True,
-        "buy_condition_35_enable": True,
-        "buy_condition_36_enable": True,
-        "buy_condition_37_enable": True,
-        "buy_condition_38_enable": True,
-        "buy_condition_39_enable": True,
-        "buy_condition_40_enable": True,
-        "buy_condition_41_enable": True,
-        "buy_condition_42_enable": True,
-        "buy_condition_43_enable": True,
-        "buy_condition_44_enable": True,
-        "buy_condition_45_enable": True,
-        "buy_condition_46_enable": True,
-        "buy_condition_47_enable": True,
-        "buy_condition_48_enable": True,
-        "buy_condition_49_enable": True,
-        "buy_condition_50_enable": True,
-        "buy_condition_51_enable": True,
-        "buy_condition_52_enable": True,
-        "buy_condition_53_enable": True,
-        "buy_condition_54_enable": True,
-        "buy_condition_55_enable": True,
-        "buy_condition_56_enable": True,
-        "buy_condition_57_enable": True,
-        "buy_condition_58_enable": True,
-        "buy_condition_59_enable": True,
-        "buy_condition_60_enable": True,
-        "buy_condition_61_enable": True,
-        "buy_condition_62_enable": True,
-        "buy_condition_63_enable": True,
-        "buy_condition_64_enable": True,
-        "buy_condition_65_enable": True,
+        "buy_condition_1_enable": False,
+        "buy_condition_2_enable": False,
+        "buy_condition_3_enable": False,
+        "buy_condition_4_enable": False,
+        "buy_condition_5_enable": False,
+        "buy_condition_6_enable": False,
+        "buy_condition_7_enable": False,
+        "buy_condition_8_enable": False,
+        "buy_condition_9_enable": False,
+        "buy_condition_10_enable": False,
+        "buy_condition_11_enable": False,
+        "buy_condition_12_enable": False,
+        "buy_condition_13_enable": False,
+        "buy_condition_14_enable": False,
+        "buy_condition_15_enable": False,
+        "buy_condition_16_enable": False,
+        "buy_condition_17_enable": False,
+        "buy_condition_18_enable": False,
+        "buy_condition_19_enable": False,
+        "buy_condition_20_enable": False,
+        "buy_condition_21_enable": False,
+        "buy_condition_22_enable": False,
+        "buy_condition_23_enable": False,
+        "buy_condition_24_enable": False,
+        "buy_condition_25_enable": False,
+        "buy_condition_26_enable": False,
+        "buy_condition_27_enable": False,
+        "buy_condition_28_enable": False,
+        "buy_condition_29_enable": False,
+        "buy_condition_30_enable": False,
+        "buy_condition_31_enable": False,
+        "buy_condition_32_enable": False,
+        "buy_condition_33_enable": False,
+        "buy_condition_34_enable": False,
+        "buy_condition_35_enable": False,
+        "buy_condition_36_enable": False,
+        "buy_condition_37_enable": False,
+        "buy_condition_38_enable": False,
+        "buy_condition_39_enable": False,
+        "buy_condition_40_enable": False,
+        "buy_condition_41_enable": False,
+        "buy_condition_42_enable": False,
+        "buy_condition_43_enable": False,
+        "buy_condition_44_enable": False,
+        "buy_condition_45_enable": False,
+        "buy_condition_46_enable": False,
+        "buy_condition_47_enable": False,
+        "buy_condition_48_enable": False,
+        "buy_condition_49_enable": False,
+        "buy_condition_50_enable": False,
+        "buy_condition_51_enable": False,
+        "buy_condition_52_enable": False,
+        "buy_condition_53_enable": False,
+        "buy_condition_54_enable": False,
+        "buy_condition_55_enable": False,
+        "buy_condition_56_enable": False,
+        "buy_condition_57_enable": False,
+        "buy_condition_58_enable": False,
+        "buy_condition_59_enable": False,
+        "buy_condition_60_enable": False,
+        "buy_condition_61_enable": False,
+        "buy_condition_62_enable": False,
+        "buy_condition_63_enable": False,
+        "buy_condition_64_enable": False,
+        "buy_condition_65_enable": False,
         "buy_condition_66_enable": True,
-        "btc_1h_not_downtrend": False,
-        "close_above_ema_fast": False,
-        "close_above_ema_fast_len": "100",
-        "close_above_ema_slow": False,
-        "close_above_ema_slow_len": "12",
-        "ema_fast": False,
-        "ema_fast_len": "20",
-        "ema_slow": False,
-        "ema_slow_len": "20",
-        "safe_dips_threshold_0": 4.388,
-        "safe_dips_threshold_12": 4.819,
-        "safe_dips_threshold_144": 3.713,
-        "safe_dips_threshold_2": 2.929,
-        "safe_pump_12h_threshold": 0.267,
-        "safe_pump_24h_threshold": 2.673,
-        "safe_pump_36h_threshold": 0.176,
-        "safe_pump_48h_threshold": 0.692,
-        "safe_pump_6h_threshold": 0.114,
-        "sma200_1h_rising": False,
-        "sma200_1h_rising_val": 105,
-        "sma200_rising": False,
-        "sma200_rising_val": 113,
+        "safe_dips_threshold_0": 2.704,
+        "safe_dips_threshold_12": 7.94,
+        "safe_dips_threshold_144": 0.08,
+        "safe_dips_threshold_2": 9.048,
+        "safe_pump_12h_threshold": 9.178,
+        "safe_pump_24h_threshold": 5.605,
+        "safe_pump_36h_threshold": 4.087,
+        "safe_pump_48h_threshold": 7.382,
+        "safe_pump_6h_threshold": 5.159,
+        "btc_1h_not_downtrend": False,  # value loaded from strategy
+        "close_above_ema_fast": False,  # value loaded from strategy
+        "close_above_ema_fast_len": "100",  # value loaded from strategy
+        "close_above_ema_slow": False,  # value loaded from strategy
+        "close_above_ema_slow_len": "12",  # value loaded from strategy
+        "ema_fast": False,  # value loaded from strategy
+        "ema_fast_len": "20",  # value loaded from strategy
+        "ema_slow": False,  # value loaded from strategy
+        "ema_slow_len": "20",  # value loaded from strategy
+        "sma200_1h_rising": False,  # value loaded from strategy
+        "sma200_1h_rising_val": 105,  # value loaded from strategy
+        "sma200_rising": False,  # value loaded from strategy
+        "sma200_rising_val": 113,  # value loaded from strategy
         #############
     }
     
@@ -323,8 +323,25 @@ class NostalgiaForInfinityXw(IStrategy):
         10, 300, default=buy_params["sma200_1h_rising_val"], space='buy', optimize=True)
     
     btc_1h_not_downtrend = CategoricalParameter(
-        [True, False], default=buy_params["btc_1h_not_downtrend"], space='buy', optimize=False)
+        [True, False], default=buy_params["btc_1h_not_downtrend"], space='buy', optimize=True)
     
+    stoploss_1 = DecimalParameter(
+        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+    
+    stoploss_1_time = IntParameter(
+        120, 9200, default=120, space='sell', optimize=True)
+    
+    stoploss_2 = DecimalParameter(
+        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+    
+    stoploss_2_time = IntParameter(
+        120, 9200, default=120, space='sell', optimize=True)
+    
+    stoploss_3 = DecimalParameter(
+        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+    
+    stoploss_3_time = IntParameter(
+        120, 9200, default=120, space='sell', optimize=True)
     
     safe_dips_threshold_0 = DecimalParameter(
         0, 10.0, decimals=3, default=buy_params["safe_dips_threshold_0"], space='buy', optimize=True)
@@ -2169,16 +2186,16 @@ class NostalgiaForInfinityXw(IStrategy):
             "sma200_rising_val"         : sma200_rising_val.value,
             "sma200_1h_rising"          : sma200_1h_rising.value,
             "sma200_1h_rising_val"      : sma200_1h_rising_val.value,
-            "safe_dips_threshold_0"     : 0.032,
-            "safe_dips_threshold_2"     : 0.09,
-            "safe_dips_threshold_12"    : 0.24,
-            "safe_dips_threshold_144"   : 0.36,
-            "safe_pump_6h_threshold"    : None,
-            "safe_pump_12h_threshold"   : None,
-            "safe_pump_24h_threshold"   : None,
-            "safe_pump_36h_threshold"   : None,
-            "safe_pump_48h_threshold"   : None,
-            "btc_1h_not_downtrend"      : False,
+            "safe_dips_threshold_0"     : safe_dips_threshold_0.value,
+            "safe_dips_threshold_2"     : safe_dips_threshold_2.value,
+            "safe_dips_threshold_12"    : safe_dips_threshold_12.value,
+            "safe_dips_threshold_144"   : safe_dips_threshold_144.value,
+            "safe_pump_6h_threshold"    : safe_pump_6h_threshold.value,
+            "safe_pump_12h_threshold"   : safe_pump_12h_threshold.value,
+            "safe_pump_24h_threshold"   : safe_pump_24h_threshold.value,
+            "safe_pump_36h_threshold"   : safe_pump_36h_threshold.value,
+            "safe_pump_48h_threshold"   : safe_pump_48h_threshold.value,
+            "btc_1h_not_downtrend"      : btc_1h_not_downtrend.value,
             "close_over_pivot_type"     : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
             "close_over_pivot_offset"   : 1.0,
             "close_under_pivot_type"    : "none", # pivot, sup1, sup2, sup3, res1, res2, res3
@@ -2558,6 +2575,21 @@ class NostalgiaForInfinityXw(IStrategy):
 
     def sell_stoploss(self, current_profit: float, max_profit: float, max_loss: float, last_candle, previous_candle_1, trade: 'Trade', current_time: 'datetime') -> tuple:
         # Under & near EMA200, local uptrend move
+        
+        if hasattr(trade, 'buy_tag') and trade.buy_tag is not None:
+            buy_tag = trade.buy_tag
+            buy_tags = buy_tag.split()
+            
+            if all(c in ['66'] for c in buy_tags):
+                if (current_profit < self.stoploss_1.value) and (current_time - timedelta(minutes=self.stoploss_1_time.value) > trade.open_date_utc):
+                    return True, 'stoploss_wieger_1'
+                elif (current_profit < self.stoploss_2.value) and (current_time - timedelta(minutes=self.stoploss_2_time.value) > trade.open_date_utc):
+                    return True, 'stoploss_wieger_2'
+                elif (current_profit < self.stoploss_3.value) and (current_time - timedelta(minutes=self.stoploss_2_time.value) > trade.open_date_utc):
+                    return True, 'stoploss_wieger_3'
+                
+        
+        
         if (
                 (current_profit < -0.025)
                 and (last_candle['close'] < last_candle['ema_200'])
