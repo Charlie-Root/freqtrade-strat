@@ -261,29 +261,38 @@ class NostalgiaForInfinityXw(IStrategy):
         "buy_condition_64_enable": False,
         "buy_condition_65_enable": False,
         "buy_condition_66_enable": True,
-        "safe_dips_threshold_0": 2.704,
-        "safe_dips_threshold_12": 7.94,
-        "safe_dips_threshold_144": 0.08,
-        "safe_dips_threshold_2": 9.048,
-        "safe_pump_12h_threshold": 9.178,
-        "safe_pump_24h_threshold": 5.605,
-        "safe_pump_36h_threshold": 4.087,
-        "safe_pump_48h_threshold": 7.382,
-        "safe_pump_6h_threshold": 5.159,
+        "close_above_ema_fast": False,
+        "close_above_ema_fast_len": "200",
+        "close_above_ema_slow": False,
+        "close_above_ema_slow_len": "100",
+        "ema_fast": False,
+        "ema_fast_len": "20",
+        "ema_slow": True,
+        "ema_slow_len": "25",
+        "safe_dips_threshold_0": 2.433,
+        "safe_dips_threshold_12": 5.732,
+        "safe_dips_threshold_144": 9.362,
+        "safe_dips_threshold_2": 0.346,
+        "safe_pump_12h_threshold": 0.722,
+        "safe_pump_24h_threshold": 0.867,
+        "safe_pump_36h_threshold": 7.7,
+        "safe_pump_48h_threshold": 7.714,
+        "safe_pump_6h_threshold": 2.624,
+        "sma200_1h_rising": True,
+        "sma200_1h_rising_val": 262,
+        "sma200_rising": True,
+        "sma200_rising_val": 287,
         "btc_1h_not_downtrend": False,  # value loaded from strategy
-        "close_above_ema_fast": False,  # value loaded from strategy
-        "close_above_ema_fast_len": "100",  # value loaded from strategy
-        "close_above_ema_slow": False,  # value loaded from strategy
-        "close_above_ema_slow_len": "12",  # value loaded from strategy
-        "ema_fast": False,  # value loaded from strategy
-        "ema_fast_len": "20",  # value loaded from strategy
-        "ema_slow": False,  # value loaded from strategy
-        "ema_slow_len": "20",  # value loaded from strategy
-        "sma200_1h_rising": False,  # value loaded from strategy
-        "sma200_1h_rising_val": 105,  # value loaded from strategy
-        "sma200_rising": False,  # value loaded from strategy
-        "sma200_rising_val": 113,  # value loaded from strategy
         #############
+    }
+    
+    sell_params = {
+        "stoploss_1": -0.845,
+        "stoploss_1_time": 1999,
+        "stoploss_2": -3.565,
+        "stoploss_2_time": 4901,
+        "stoploss_3": -0.939,
+        "stoploss_3_time": 7912,
     }
     
     ema_fast = CategoricalParameter(
@@ -326,22 +335,22 @@ class NostalgiaForInfinityXw(IStrategy):
         [True, False], default=buy_params["btc_1h_not_downtrend"], space='buy', optimize=False)
     
     stoploss_1 = DecimalParameter(
-        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+        -5, -0.5, decimals=3, default=sell_params["stoploss_1"], space='sell', optimize=True)
     
     stoploss_1_time = IntParameter(
-        120, 9200, default=120, space='sell', optimize=True)
+        120, 9200, default=sell_params["stoploss_1_time"], space='sell', optimize=True)
     
     stoploss_2 = DecimalParameter(
-        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+        -5, -0.5, decimals=3, default=sell_params["stoploss_2"], space='sell', optimize=True)
     
     stoploss_2_time = IntParameter(
-        120, 9200, default=120, space='sell', optimize=True)
+        120, 9200, default=sell_params["stoploss_2_time"], space='sell', optimize=True)
     
     stoploss_3 = DecimalParameter(
-        -5, -0.5, decimals=3, default=-0.02, space='sell', optimize=True)
+        -5, -0.5, decimals=3, default=sell_params["stoploss_3"], space='sell', optimize=True)
     
     stoploss_3_time = IntParameter(
-        120, 9200, default=120, space='sell', optimize=True)
+        120, 9200, default=sell_params["stoploss_3_time"], space='sell', optimize=True)
     
     safe_dips_threshold_0 = DecimalParameter(
         0, 10.0, decimals=3, default=buy_params["safe_dips_threshold_0"], space='buy', optimize=True)
